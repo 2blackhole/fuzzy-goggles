@@ -5,3 +5,4 @@
 .sconsign.dblite
 compile_commands.json
 vc140.pdb
+/.idea
