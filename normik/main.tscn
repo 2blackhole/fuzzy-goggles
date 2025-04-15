@@ -5,6 +5,8 @@
 [node name="Main" type="Node3D"]
 
 [node name="Node2D" type="Node2D" parent="."]
+position = Vector2(400, 204)
 
 [node name="GDExample" type="GDExample" parent="Node2D"]
+position = Vector2(222, 108)
 texture = ExtResource("1_ig7tw")

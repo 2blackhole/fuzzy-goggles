@@ -1,7 +1,7 @@
 /godot-cpp
 /normik/bin
 *obj
+*.os
 .sconsign.dblite
 compile_commands.json
 vc140.pdb
-
