@@ -1,23 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://bn7mvpmpd3gio" path="res://models/korobka.gltf" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://c5t5nw5n1aafo" path="res://camera_3d_2.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dt5avrpmeq2w7" path="res://scripts/govno.gd" id="2_0xm2m"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("cameras")]
+script = ExtResource("2_0xm2m")
+cameras = [NodePath("Camera3D2"), NodePath("Camera3D")]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.673012, 0.391945, -0.627243, 0, 0.848048, 0.529919, 0.739631, 0.356642, -0.570747, -2.74501, 2.39648, -3.54278)
+current = true
+fov = 90.0
+
+[node name="Node3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.10697)
+lod_bias = 0.001
 
 [node name="korobka" parent="Node3D" instance=ExtResource("1_ig7tw")]
 
-[node name="SubViewport" type="SubViewport" parent="."]
-
-[node name="Camera3D2" type="Camera3D" parent="SubViewport"]
+[node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.77384, -0.389948, 0.499111, 0, 0.788011, 0.615662, -0.633381, -0.476424, 0.609794, 0.291867, 2.34854, 7.59615)
-current = true
-fov = 90.0
-script = ExtResource("2_0xm2m")
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-0.673012, 0.391945, -0.627243, 0, 0.848048, 0.529919, 0.739631, 0.356642, -0.570747, -2.74501, 2.39648, -3.54278)
 fov = 90.0
