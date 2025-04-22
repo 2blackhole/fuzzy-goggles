@@ -10,6 +10,9 @@ var timer: float = 0.0
 func _ready():
 	if cameras.size() > 0:
 		cameras[0].current = true
+	var summator = Summator.new()
+	summator.add(12)
+	print(summator.get_total())
 
 func _process(delta):
 	timer += delta
