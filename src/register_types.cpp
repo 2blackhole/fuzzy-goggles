@@ -5,6 +5,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "summator.h"
+#include "camera/camera_manager.h"
 
 using namespace godot;
 
@@ -14,6 +15,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}	
 	GDREGISTER_CLASS(Summator);
+	GDREGISTER_CLASS(CameraManager);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
