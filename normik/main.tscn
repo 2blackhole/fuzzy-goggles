@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bn7mvpmpd3gio" path="res://models/korobka.gltf" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dt5avrpmeq2w7" path="res://scripts/govno.gd" id="2_0xm2m"]
+[ext_resource type="Environment" uid="uid://8alwcsojipkh" path="res://enviroments/level_enviroment.tres" id="3_1bvp3"]
+[ext_resource type="CameraAttributesPractical" uid="uid://wfwmxsxc6kxi" path="res://camera_attributes/main.tres" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dxhur4cbsm631" path="res://models/svetilnik.gltf" id="5_lquwl"]
+
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,6 +22,8 @@ glow_enabled = true
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("cameras")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6854, 0, 0)
+
+[node name="level" type="Node3D" node_paths=PackedStringArray("cameras")]
 script = ExtResource("2_0xm2m")
 cameras = [NodePath("Camera3D2"), NodePath("Camera3D")]
 
@@ -38,7 +44,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.10697)
 lod_bias = 0.001
 
 [node name="korobka" parent="Node3D" instance=ExtResource("1_ig7tw")]
+physics_interpolation_mode = 1
+
+[node name="svetilnik" parent="Node3D" instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.995052, 0, 0.0993545, 0, 1, 0, -0.0993545, 0, 0.995052, 0.446436, 2.48823, -0.548232)
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.77384, -0.389948, 0.499111, 0, 0.788011, 0.615662, -0.633381, -0.476424, 0.609794, 0.291867, 2.34854, 7.59615)
 fov = 90.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_1bvp3")
+camera_attributes = ExtResource("4_lquwl")
