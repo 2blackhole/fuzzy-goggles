@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=6 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://bn7mvpmpd3gio" path="res://models/korobka.gltf" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://dt5avrpmeq2w7" path="res://scripts/govno.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dxhur4cbsm631" path="res://models/svetilnik.gltf" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
@@ -17,9 +16,7 @@ sky = SubResource("Sky_h2yge")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("cameras")]
-script = ExtResource("2_0xm2m")
-cameras = [NodePath("Camera3D"), NodePath("Camera3D2")]
+[node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
