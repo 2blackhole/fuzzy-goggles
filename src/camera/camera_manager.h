@@ -24,7 +24,6 @@ public:
     CameraManager() = default;
     ~CameraManager();
 
-    void _process(double delta) override;
     void register_camera(Camera3D* camera);
     void switch_to_camera(int index);
     // void handle_click(const Ref<InputEvent>& event);
