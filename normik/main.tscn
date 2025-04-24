@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=7 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://bn7mvpmpd3gio" path="res://models/korobka.gltf" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dt5avrpmeq2w7" path="res://scripts/govno.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dxhur4cbsm631" path="res://models/svetilnik.gltf" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
@@ -45,3 +46,4 @@ transform = Transform3D(0.77384, -0.389948, 0.499111, 0, 0.788011, 0.615662, -0.
 fov = 90.0
 
 [node name="CameraManager" type="CameraManager" parent="."]
+script = ExtResource("3_h2yge")
