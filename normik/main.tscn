@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=8 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://bn7mvpmpd3gio" path="res://models/korobka.gltf" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b5k1iepdp3ve0" path="res://scripts/camera_manager.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://daagio6e3ohng" path="res://models/Toilet pack.glb" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dxhur4cbsm631" path="res://models/svetilnik.gltf" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
@@ -47,3 +48,6 @@ fov = 90.0
 
 [node name="CameraManager" type="CameraManager" parent="."]
 script = ExtResource("3_h2yge")
+
+[node name="Toilet pack" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1.79343, 0.211159, 0.0634632, -0.213165, 1.79342, 0.056714, -0.0563609, -0.0637769, 1.80493, -1.30631, 0.212563, 1.88099)
