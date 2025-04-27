@@ -28,6 +28,5 @@ public:
     
     void set_spawn_chance(float chance);
     float get_spawn_chance() const;
-
 };
 #endif
