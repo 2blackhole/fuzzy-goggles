@@ -6,6 +6,9 @@
 
 #include "summator.h"
 #include "camera/camera_manager.h"
+#include "anomaly/anomaly.h"
+#include "anomaly/anomaly_manager.h"
+
 
 using namespace godot;
 
@@ -16,6 +19,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	}	
 	GDREGISTER_CLASS(Summator);
 	GDREGISTER_CLASS(CameraManager);
+	GDREGISTER_CLASS(Anomaly);
+	//GDREGISTER_CLASS(AnomalyManager);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

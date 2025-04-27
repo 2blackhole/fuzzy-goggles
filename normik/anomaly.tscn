@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3qg1tgo83vgb"]
+
+[ext_resource type="PackedScene" uid="uid://daagio6e3ohng" path="res://models/Toilet pack.glb" id="1_c1slk"]
+[ext_resource type="Script" uid="uid://22sbm55vpqft" path="res://scripts/godno.gd" id="1_knx40"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c1slk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c1slk"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_oi3di"]
+sky_material = SubResource("ProceduralSkyMaterial_c1slk")
+
+[sub_resource type="Environment" id="Environment_knx40"]
+background_mode = 2
+sky = SubResource("Sky_oi3di")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_knx40")
+
+[node name="Anomaly" type="Anomaly" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Anomaly"]
+
+[node name="Toilet pack" parent="Anomaly/MeshInstance3D" instance=ExtResource("1_c1slk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Anomaly"]
+shape = SubResource("SphereShape3D_c1slk")
+disabled = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 10.6082, -6.7812)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_knx40")

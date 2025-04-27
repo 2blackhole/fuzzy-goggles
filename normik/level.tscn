@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://yjnwgxlqbnte"]
+
+[ext_resource type="Script" uid="uid://b5k1iepdp3ve0" path="res://scripts/camera_manager.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://udow7n3ikopk" path="res://govninga/scene.gltf" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://daagio6e3ohng" path="res://models/Toilet pack.glb" id="4_1bvp3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_oi3di"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_oi3di")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_oi3di"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 42.08
+dof_blur_far_transition = -1.0
+dof_blur_near_distance = 0.01
+dof_blur_amount = 0.16
+
+[node name="level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 10.6082, -6.7812)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.482701, 0.464095, -0.742708, 4.40855e-08, 0.848048, 0.529919, 0.875785, 0.255793, -0.409354, -8.34665, 5.38536, -18.12)
+current = true
+fov = 80.0
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.840567, -0.37494, 0.390983, 0, 0.72176, 0.692143, -0.541708, -0.581792, 0.606688, -0.602536, 6.74731, 36.7683)
+attributes = SubResource("CameraAttributesPractical_oi3di")
+fov = 80.0
+
+[node name="CameraManager" type="CameraManager" parent="."]
+script = ExtResource("3_h2yge")
+
+[node name="Toilet pack" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.75699, -0.201309, -9.48242)
+
+[node name="city" parent="." instance=ExtResource("3_oi3di")]
+
+[node name="Toilet pack2" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.353, 2.9465, 31.1695)
