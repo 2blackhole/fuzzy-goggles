@@ -19,7 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="AnomalyManager" type="AnomalyManager"]
-max_active_anomalies = 2
+anomalies_count = 3
 script = ExtResource("1_mgwxe")
 
 [node name="Anomaly" type="Anomaly" parent="."]
