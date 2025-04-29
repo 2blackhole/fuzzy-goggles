@@ -21,26 +21,21 @@ protected:
     static void _bind_methods();
     
 public:
+    // Anomaly() = default;
     // ~Anomaly() {
     //     memdelete(collision_shape);
     //     memdelete(mesh);
     // }
-    // Anomaly() = default;
+    
     void _ready() override;
     void _init() {}
     static int id;
-    
-    void set_type(const String& _type) {
-        type = _type;
-    }
 
-    String get_type() const {
-        return type;
-    }
+    void set_type(const String& _type) { type = _type; }
 
-    bool get_active() const {
-        return is_active;
-    }
+    String get_type() const { return type; }
+
+    bool get_active() const { return is_active; }
 
     void activate();
     void deactivate();
