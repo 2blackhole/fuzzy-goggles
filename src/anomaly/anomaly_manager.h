@@ -11,23 +11,61 @@ class AnomalyManager : public Node {
 
 private:
     std::vector<Anomaly*> anomalies;
-    int anomaly_count;
-    int max_active_anomalies;
-    float spawn_chance;
-    float spawn_interval;
-
+    int active_anomalies_count = 0;
+    int anomalies_count = 0;
+    int max_active_anomalies = 5;
+    float spawn_chance = 0.4f;
+    float spawn_interval = 5.0f;
+    
 protected:
     static void _bind_methods();
     
 public:
-    AnomalyManager();
-    ~AnomalyManager();
+    void _ready() override;
+    void _init() {
+        max_active_anomalies = 5;
+        active_anomalies_count = 0;
+        anomalies_count = 0;
+        spawn_chance = 0.4f;
+        spawn_interval = 5.0f;
+    }
 
-    void despawn_anomaly(Anomaly* anomaly);
-    void despawn_all_anomalies();
+    void set_anomalies_count(int i) {
+        anomalies_count = i;
+    }
     
-    void set_spawn_chance(float chance);
-    float get_spawn_chance() const;
+    int get_anomalies_count() {
+        return anomalies_count;
+    }
 
+    int get_max_active_anomalies() {
+        return max_active_anomalies;
+    }
+
+    void set_max_active_anomalies(int i) {
+        max_active_anomalies = i;
+    }
+
+    int get_active_anomalies_count() {
+        return active_anomalies_count;
+    }
+
+    void set_active_anomalies_count(int i) {
+        active_anomalies_count = i;
+    }
+
+    Anomaly* operator() (int i) {
+        return anomalies[i];
+    }
+    
+    void set_spawn_chance(float chance) {
+        spawn_chance = CLAMP(chance, 0.0f, 1.0f);
+    }
+
+    float get_spawn_chance() const {
+        return spawn_chance;
+    }
+
+    void superpuperbingcheling_yehaopien_bingchelin(int SUPADUPA____CHINLGSDL_SURNAKAFLAFD);
 };
 #endif

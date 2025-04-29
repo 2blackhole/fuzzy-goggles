@@ -24,6 +24,7 @@ script = ExtResource("1_knx40")
 [node name="Anomaly" type="Anomaly" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Anomaly"]
+visible = false
 
 [node name="Toilet pack" parent="Anomaly/MeshInstance3D" instance=ExtResource("1_c1slk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)

@@ -20,7 +20,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Summator);
 	GDREGISTER_CLASS(CameraManager);
 	GDREGISTER_CLASS(Anomaly);
-	//GDREGISTER_CLASS(AnomalyManager);
+	GDREGISTER_CLASS(AnomalyManager);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
