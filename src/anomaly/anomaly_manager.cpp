@@ -34,7 +34,7 @@ void AnomalyManager::_bind_methods() {
 void AnomalyManager::_ready() {
     anomalies_count = 0;
     TypedArray vec = get_children(); 
-    for (int i = 0; i < vec.size(); i++) {
+    for (int i = 0; i < vec.size(); ++i) {
         Anomaly* el = cast_to<Anomaly> (vec[i]);
         if (el) {
             anomalies.push_back(el);
@@ -46,7 +46,7 @@ void AnomalyManager::_ready() {
 }
 
 void AnomalyManager::superpuperbingcheling_yehaopien_bingchelin(int SUPADUPA____CHINLGSDL_SURNAKAFLAFD) {
-    for (int i = 0; i < get_anomalies_count(); i++) {
+    for (int i = 0; i < get_anomalies_count(); ++i) {
         anomalies[i]->activate();
         active_anomalies_count++;
     }

@@ -68,4 +68,5 @@ public:
 
     void superpuperbingcheling_yehaopien_bingchelin(int SUPADUPA____CHINLGSDL_SURNAKAFLAFD);
 };
-#endif
+
+#endif // ANOMALY_MANAGER
