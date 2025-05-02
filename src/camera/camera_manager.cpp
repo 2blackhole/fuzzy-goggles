@@ -1,11 +1,8 @@
 #include "camera_manager.h"
-#include <godot_cpp/core/class_db.hpp>
 
 using namespace godot;
 
 void CameraManager::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("_input", "event"), &CameraManager::_input);
-    ClassDB::bind_method(D_METHOD("register_camera", "camera"), &CameraManager::register_camera);
     ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
     ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
     ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
@@ -16,43 +13,34 @@ void CameraManager::_bind_methods() {
 }
 
 void CameraManager::_ready() {
-    Node* parent = get_parent();
-    if (!parent) { return; }
-
-    TypedArray<Node> children = parent->get_children();
-
     cameras.clear();
 
+    TypedArray<Node> children = get_children();
+
     for (int i = 0; i < children.size(); ++i) {
-        if (Camera3D* camera = Object::cast_to<Camera3D>(children[i])) { cameras.push_back(camera); }
+        if (Camera3D* camera = Object::cast_to<Camera3D>(children[i])) {
+            cameras.push_back(camera);
+            UtilityFunctions::print("Registered camera: ",camera->get_name());
+        }
     }
 
-    if (cameras.empty()) {
-        print_error("No cameras found in scene!");
-        return;
-    }
+    if (cameras.empty()) { return; }
 
-    for (Camera3D* camera : cameras) {
-        register_camera(camera);
-    }
-
-    print_line("Camera system initialized. Total cameras: ", cameras.size());
+    switch_to_camera(0);
 }
 
 void CameraManager::_input(const Ref<InputEvent>& event) {
+    if (event.is_null()) { return; }
+
+    UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
+
     if (event->is_action_pressed("ui_right")) {
+        UtilityFunctions::print("Switching to next camera...");
         switch_to_next_camera();
-    } else if (event->is_action_pressed("ui_left")) {
-        switch_to_previous_camera();
     }
-}
-
-void CameraManager::register_camera(Camera3D* camera) {
-    if (!camera) return;
-    cameras.push_back(camera);
-
-    if (current_active_camera_id == -1) {
-        switch_to_camera(0);
+    else if (event->is_action_pressed("ui_left")) {
+        UtilityFunctions::print("Switching to previous camera...");
+        switch_to_previous_camera();
     }
 }
 
