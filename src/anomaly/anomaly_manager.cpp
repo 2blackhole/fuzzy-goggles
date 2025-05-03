@@ -29,25 +29,37 @@ void AnomalyManager::_bind_methods() {
 
     // Регистрация специального метода
     ClassDB::bind_method(D_METHOD("superpuperbingcheling_yehaopien_bingchelin", "value"), &AnomalyManager::superpuperbingcheling_yehaopien_bingchelin);
+    ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &AnomalyManager::on_anomaly_deactivated);
 }
 
 void AnomalyManager::_ready() {
     anomalies_count = 0;
-    TypedArray vec = get_children(); 
+    TypedArray vec = get_children();
     for (int i = 0; i < vec.size(); ++i) {
-        Anomaly* el = cast_to<Anomaly> (vec[i]);
+        Anomaly* el = cast_to<Anomaly>(vec[i]);
         if (el) {
             anomalies.push_back(el);
-            anomalies_count++;
-            print_line("Anomaly added: ", "total : ", get_anomalies_count());
-            print_line(el->get_name());
+            anomalies_count += 1;
+            el->connect("deactivated", Callable(this, "on_anomaly_deactivated"));
         }
     }
 }
 
+void AnomalyManager::on_anomaly_deactivated() {
+    active_anomalies_count = MAX(0, active_anomalies_count - 1);
+    print_line("Anomaly deactivated. Active count: ", active_anomalies_count);
+}
+
 void AnomalyManager::superpuperbingcheling_yehaopien_bingchelin(int SUPADUPA____CHINLGSDL_SURNAKAFLAFD) {
-    for (int i = 0; i < get_anomalies_count(); ++i) {
-        anomalies[i]->activate();
-        active_anomalies_count++;
+    if (SUPADUPA____CHINLGSDL_SURNAKAFLAFD % 2 == 0) {
+        for (int i = 0; i < get_anomalies_count(); ++i) {
+            anomalies[i]->activate();
+            active_anomalies_count++;
+        }
+    } else {
+        for (int i = 0; i < get_anomalies_count(); ++i) {
+            anomalies[i]->deactivate();
+            active_anomalies_count--;
+        }
     }
 }

@@ -30,43 +30,23 @@ public:
         spawn_interval = 5.0f;
     }
 
-    void set_anomalies_count(int i) {
-        anomalies_count = i;
-    }
+    void set_anomalies_count(int i) { anomalies_count = i; }
+    int get_anomalies_count() { return anomalies_count; }
+
+    int get_max_active_anomalies() { return max_active_anomalies; }
+    void set_max_active_anomalies(int i) { max_active_anomalies = i; }
+
+    int get_active_anomalies_count() { return active_anomalies_count; }
+    void set_active_anomalies_count(int i) { active_anomalies_count = i; }
+
+    Anomaly* operator()(int i) { return anomalies[i]; }
     
-    int get_anomalies_count() {
-        return anomalies_count;
-    }
+    void set_spawn_chance(float chance) { spawn_chance = CLAMP(chance, 0.0f, 1.0f); }
+    float get_spawn_chance() const { return spawn_chance; }
 
-    int get_max_active_anomalies() {
-        return max_active_anomalies;
-    }
-
-    void set_max_active_anomalies(int i) {
-        max_active_anomalies = i;
-    }
-
-    int get_active_anomalies_count() {
-        return active_anomalies_count;
-    }
-
-    void set_active_anomalies_count(int i) {
-        active_anomalies_count = i;
-    }
-
-    Anomaly* operator() (int i) {
-        return anomalies[i];
-    }
-    
-    void set_spawn_chance(float chance) {
-        spawn_chance = CLAMP(chance, 0.0f, 1.0f);
-    }
-
-    float get_spawn_chance() const {
-        return spawn_chance;
-    }
-
-    void superpuperbingcheling_yehaopien_bingchelin(int SUPADUPA____CHINLGSDL_SURNAKAFLAFD);
+    void on_anomaly_deactivated();
+    void superpuperbingcheling_yehaopien_bingchelin(
+        int SUPADUPA____CHINLGSDL_SURNAKAFLAFD);
 };
 
 #endif // ANOMALY_MANAGER

@@ -1,15 +1,14 @@
 #include "anomaly.h"
 
 void Anomaly::_bind_methods() {
-    //ClassDB::bind_method(D_METHOD("_ready"), &Anomaly::_ready);
+    ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &Anomaly::on_anomaly_deactivated); ADD_SIGNAL(MethodInfo("deactivated"));
+
     ClassDB::bind_method(D_METHOD("activate"), &Anomaly::activate);
     ClassDB::bind_method(D_METHOD("deactivate"), &Anomaly::deactivate);
-    // ClassDB::bind_method(D_METHOD("hit"), &Anomaly::hit);
     ClassDB::bind_method(D_METHOD("get_active"), &Anomaly::get_active);
     ClassDB::bind_method(D_METHOD("update_visible_state"), &Anomaly::update_visible_state);
-    
-    // ADD_SIGNAL(MethodInfo("hit"));
 }
+
 void Anomaly::_ready() {
     mesh = get_node<MeshInstance3D>("MeshInstance3D");
     collision_shape = get_node<CollisionShape3D>("CollisionShape3D");

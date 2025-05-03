@@ -1,10 +1,16 @@
 #include "camera_manager.h"
 
+
+
 using namespace godot;
 
 void CameraManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
     ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
+
+    ClassDB::bind_method(D_METHOD("process_raycast"), &CameraManager::process_raycast);
+    ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
+
     ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
     ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
 
@@ -35,12 +41,13 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
     UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
 
     if (event->is_action_pressed("ui_right")) {
-        UtilityFunctions::print("Switching to next camera...");
+        print_line("Switching to next camera...");
         switch_to_next_camera();
-    }
-    else if (event->is_action_pressed("ui_left")) {
-        UtilityFunctions::print("Switching to previous camera...");
+    } else if (event->is_action_pressed("ui_left")) {
+        print_line("Switching to previous camera...");
         switch_to_previous_camera();
+    } else {
+        handle_click(event);
     }
 }
 
@@ -60,6 +67,83 @@ void CameraManager::switch_to_camera(int index) {
     cameras[index]->set_current(true);
     
     emit_signal("camera_switched", index);
+}
+
+void CameraManager::process_raycast(const Vector2& mouse_position) {
+    if (current_active_camera_id == -1) { return;}
+
+    Camera3D* current_cam = cameras[current_active_camera_id];
+    if (!current_cam) {
+        print_line("Penis");
+        return;
+    }
+
+    World3D* world = current_cam->get_world_3d().ptr();
+    if (!world) {
+        print_error("Failed to get World3D");
+        return;
+    }
+
+    PhysicsDirectSpaceState3D* space_state = world->get_direct_space_state();
+    if (!space_state) {
+        print_error("Failed to get SpaceState");
+        return;
+    }
+
+    Ref<PhysicsRayQueryParameters3D> params = PhysicsRayQueryParameters3D::create(
+        current_cam->project_ray_origin(mouse_position),
+        current_cam->project_ray_origin(mouse_position)
+        + current_cam->project_ray_normal(mouse_position)*1000.0f);
+
+    Dictionary ray_result = space_state->intersect_ray(params);
+    // UtilityFunctions::print("Raycast result: ", ray_result);
+    // UtilityFunctions::print("Ray from: ", params->get_from()," to: ", params->get_to());
+    // if (ray_result.size() > 0) {
+    //     Object* collider = ray_result["collider"];
+    //     if (Node* collider_node = cast_to<Node>(collider)) {
+    //         if (Anomaly* anomaly = cast_to<Anomaly>(collider_node->get_parent())) {
+    //             print_line("nevork");
+    //             anomaly->deactivate();
+    //             emit_signal("raycast_hit", anomaly);
+    //         }
+    //     }
+    // }
+    if (ray_result.has("collider")) {
+        Object* collider = ray_result["collider"];
+        if (collider) {
+            Node* collider_node = Object::cast_to<Node>(collider);
+            if (collider_node) {
+                UtilityFunctions::print("Hit node: ", collider_node->get_name());
+                
+                // Проверяем родителя на аномалию
+                Anomaly* anomaly = Object::cast_to<Anomaly>(collider_node);
+                if (!anomaly) {
+                    anomaly = Object::cast_to<Anomaly>(collider_node->get_parent());
+                }
+                
+                if (anomaly) {
+                    UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
+                    anomaly->deactivate();
+                    emit_signal("raycast_hit", anomaly);
+                }
+            }
+        }
+    } else {
+        UtilityFunctions::print("Raycast didn't hit anything");
+    }
+}
+
+void CameraManager::handle_click(const Ref<InputEvent>& event) {
+    if (event.is_null() || current_active_camera_id == -1) {
+        return;
+    }
+
+    Ref<InputEventMouseButton> mouse_event = event;
+    if (mouse_event.is_valid()
+            && mouse_event->get_button_index() == MOUSE_BUTTON_LEFT
+            && mouse_event->is_pressed()) {
+                process_raycast(mouse_event->get_position());
+            }
 }
 
 void CameraManager::switch_to_next_camera() {
