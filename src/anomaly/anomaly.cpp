@@ -22,7 +22,7 @@ void Anomaly::_ready() {
         return;
     }
 
-    deactivate();
+    activate();
 }
 
 void Anomaly::update_visible_state() {

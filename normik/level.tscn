@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=8 format=3 uid="uid://yjnwgxlqbnte"]
 
-[ext_resource type="Script" uid="uid://b4pjkqf6g330x" path="res://scripts/yopta.gd" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://udow7n3ikopk" path="res://govninga/scene.gltf" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://daagio6e3ohng" path="res://models/Toilet pack.glb" id="4_1bvp3"]
 
@@ -57,13 +56,12 @@ fov = 80.0
 
 [node name="AnomalyManager" type="AnomalyManager" parent="."]
 anomalies_count = 1
-script = ExtResource("3_0b4ue")
 
 [node name="Anomaly" type="Anomaly" parent="AnomalyManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08066, 0, 26.9145)
+disable_mode = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly"]
-visible = false
 
 [node name="Toilet pack" parent="AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 

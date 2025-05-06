@@ -12,37 +12,31 @@ script = ExtResource("1_mgwxe")
 [node name="Anomaly" type="Anomaly" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Anomaly"]
-visible = false
 
 [node name="Toilet pack" parent="Anomaly/MeshInstance3D" instance=ExtResource("1_6lenq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Anomaly"]
 shape = SubResource("SphereShape3D_mgwxe")
-disabled = true
 
 [node name="AnomalyPines" type="Anomaly" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74268, -0.217095, -0.816885)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyPines"]
-visible = false
 
 [node name="Toilet pack" parent="AnomalyPines/MeshInstance3D" instance=ExtResource("1_6lenq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyPines"]
 shape = SubResource("SphereShape3D_mgwxe")
-disabled = true
 
 [node name="AnomalySosines" type="Anomaly" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.257498, 1.11813, -0.836715)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalySosines"]
-visible = false
 
 [node name="Toilet pack" parent="AnomalySosines/MeshInstance3D" instance=ExtResource("1_6lenq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalySosines"]
 shape = SubResource("SphereShape3D_mgwxe")
-disabled = true

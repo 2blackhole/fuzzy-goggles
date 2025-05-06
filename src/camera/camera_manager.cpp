@@ -35,6 +35,44 @@ void CameraManager::_ready() {
     switch_to_camera(0);
 }
 
+void CameraManager::_physics_process(double delta) {
+    Camera3D* current_cam = cameras[current_active_camera_id];
+    if (!current_cam) {
+        print_line("Penis");
+        return;
+    }
+
+    World3D* world = current_cam->get_world_3d().ptr();
+    if (!world) {
+        print_error("Failed to get World3D");
+        return;
+    }
+
+    PhysicsDirectSpaceState3D* space_state = world->get_direct_space_state();
+    if (!space_state) {
+        print_error("Failed to get SpaceState");
+        return;
+    }
+
+    if (click) {
+        Vector3 from = current_cam->project_ray_origin(mouse_position);
+        Vector3 to = from + current_cam->project_ray_normal(mouse_position)*1000.0f;
+        Ref<PhysicsRayQueryParameters3D> params = PhysicsRayQueryParameters3D::create(from, to);
+
+        params->set_collide_with_areas(true);
+        params->set_collide_with_bodies(true);
+
+        Dictionary ray_result = space_state->intersect_ray(params);
+        print_line(mouse_position);
+        spawn_debug_sphere(from, Color(0, 1, 0)); // Зеленая сфера в начале луча
+        spawn_debug_sphere(to, Color(1, 0, 0));   // Красная сфера в конце луча
+        click = false;
+        print_line(ray_result);
+    }
+
+    
+}
+
 void CameraManager::_input(const Ref<InputEvent>& event) {
     if (event.is_null()) { return; }
 
@@ -90,11 +128,14 @@ void CameraManager::process_raycast(const Vector2& mouse_position) {
         return;
     }
 
-    Ref<PhysicsRayQueryParameters3D> params = PhysicsRayQueryParameters3D::create(
-        current_cam->project_ray_origin(mouse_position),
-        current_cam->project_ray_origin(mouse_position)
-        + current_cam->project_ray_normal(mouse_position)*1000.0f);
+    Vector3 from = current_cam->project_ray_origin(mouse_position);
+    Vector3 to = current_cam->project_ray_origin(mouse_position)
+    + current_cam->project_ray_normal(mouse_position)*1000.0f;
 
+    Ref<PhysicsRayQueryParameters3D> params = PhysicsRayQueryParameters3D::create(from, to);
+
+    
+    print_line(mouse_position);
     Dictionary ray_result = space_state->intersect_ray(params);
     // UtilityFunctions::print("Raycast result: ", ray_result);
     // UtilityFunctions::print("Ray from: ", params->get_from()," to: ", params->get_to());
@@ -108,29 +149,30 @@ void CameraManager::process_raycast(const Vector2& mouse_position) {
     //         }
     //     }
     // }
-    if (ray_result.has("collider")) {
-        Object* collider = ray_result["collider"];
-        if (collider) {
-            Node* collider_node = Object::cast_to<Node>(collider);
-            if (collider_node) {
-                UtilityFunctions::print("Hit node: ", collider_node->get_name());
+    print_line(ray_result);
+    // if (ray_result.has("collider")) {
+    //     Object* collider = ray_result["collider"];
+    //     if (collider) {
+    //         Node* collider_node = Object::cast_to<Node>(collider);
+    //         if (collider_node) {
+    //             UtilityFunctions::print("Hit node: ", collider_node->get_name());
                 
-                // Проверяем родителя на аномалию
-                Anomaly* anomaly = Object::cast_to<Anomaly>(collider_node);
-                if (!anomaly) {
-                    anomaly = Object::cast_to<Anomaly>(collider_node->get_parent());
-                }
+    //             // Проверяем родителя на аномалию
+    //             Anomaly* anomaly = Object::cast_to<Anomaly>(collider_node);
+    //             if (!anomaly) {
+    //                 anomaly = Object::cast_to<Anomaly>(collider_node->get_parent());
+    //             }
                 
-                if (anomaly) {
-                    UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
-                    anomaly->deactivate();
-                    emit_signal("raycast_hit", anomaly);
-                }
-            }
-        }
-    } else {
-        UtilityFunctions::print("Raycast didn't hit anything");
-    }
+    //             if (anomaly) {
+    //                 UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
+    //                 anomaly->deactivate();
+    //                 emit_signal("raycast_hit", anomaly);
+    //             }
+    //         }
+    //     }
+    // } else {
+    //     UtilityFunctions::print("Raycast didn't hit anything");
+    // }
 }
 
 void CameraManager::handle_click(const Ref<InputEvent>& event) {
@@ -142,7 +184,8 @@ void CameraManager::handle_click(const Ref<InputEvent>& event) {
     if (mouse_event.is_valid()
             && mouse_event->get_button_index() == MOUSE_BUTTON_LEFT
             && mouse_event->is_pressed()) {
-                process_raycast(mouse_event->get_position());
+                mouse_position = mouse_event->get_position();
+                click = true;
             }
 }
 
