@@ -50,7 +50,7 @@ void CameraManager::_physics_process(double delta) {
     if (!space_state) {
         print_error("Failed to get SpaceState");
         return;
-    }слава бо
+    }
 
     if (click) {
         Vector3 from = current_cam->project_ray_origin(mouse_position);
