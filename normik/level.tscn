@@ -35,7 +35,7 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 shadow_enabled = true
 
 [node name="Toilets_in_green" parent="." instance=ExtResource("4_1bvp3")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.75699, -0.201309, -9.48242)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.846643, -0.201309, -9.48242)
 
 [node name="city" parent="." instance=ExtResource("3_oi3di")]
 
@@ -66,5 +66,30 @@ disable_mode = 2
 [node name="Toilet pack" parent="AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
+shape = SubResource("SphereShape3D_vonw3")
+
+[node name="Anomaly2" type="Anomaly" parent="AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56035, 0, 28.4423)
+disable_mode = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly2"]
+
+[node name="Toilet pack" parent="AnomalyManager/Anomaly2/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
+shape = SubResource("SphereShape3D_vonw3")
+
+[node name="Anomaly3" type="Anomaly" parent="AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.963784, 0, -9.70828)
+disable_mode = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly3"]
+
+[node name="Toilet pack" parent="AnomalyManager/Anomaly3/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
 shape = SubResource("SphereShape3D_vonw3")

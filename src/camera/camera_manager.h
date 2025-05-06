@@ -54,8 +54,6 @@ public:
     void _init() { current_active_camera_id = -1; }
 
     void switch_to_camera(int index);
-    // добавить в бинд метод
-    void process_raycast(const Vector2& mouse_position);
     void handle_click(const Ref<InputEvent>& event);
 
     int get_current_camera_index() const { return current_active_camera_id; }

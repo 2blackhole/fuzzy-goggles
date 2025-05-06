@@ -8,9 +8,7 @@ void CameraManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
     ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
 
-    ClassDB::bind_method(D_METHOD("process_raycast"), &CameraManager::process_raycast);
     ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
-
     ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
     ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
 
@@ -52,7 +50,7 @@ void CameraManager::_physics_process(double delta) {
     if (!space_state) {
         print_error("Failed to get SpaceState");
         return;
-    }
+    }слава бо
 
     if (click) {
         Vector3 from = current_cam->project_ray_origin(mouse_position);
@@ -68,6 +66,28 @@ void CameraManager::_physics_process(double delta) {
         spawn_debug_sphere(to, Color(1, 0, 0));   // Красная сфера в конце луча
         click = false;
         print_line(ray_result);
+        if (ray_result.has("collider")) {
+            Object* collider = ray_result["collider"];
+            if (collider) {
+                Node* collider_node = Object::cast_to<Node>(collider);
+                if (collider_node) {
+                    UtilityFunctions::print("Hit node: ", collider_node->get_name());
+                    
+                    Anomaly* anomaly = Object::cast_to<Anomaly>(collider_node);
+                    if (!anomaly) {
+                        anomaly = Object::cast_to<Anomaly>(collider_node->get_parent());
+                    }
+                    
+                    if (anomaly) {
+                        UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
+                        anomaly->deactivate();
+                        emit_signal("raycast_hit", anomaly);
+                    }
+                }
+            }
+        } else {
+            UtilityFunctions::print("Raycast didn't hit anything");
+        }
     }
 
     
@@ -105,74 +125,6 @@ void CameraManager::switch_to_camera(int index) {
     cameras[index]->set_current(true);
     
     emit_signal("camera_switched", index);
-}
-
-void CameraManager::process_raycast(const Vector2& mouse_position) {
-    if (current_active_camera_id == -1) { return;}
-
-    Camera3D* current_cam = cameras[current_active_camera_id];
-    if (!current_cam) {
-        print_line("Penis");
-        return;
-    }
-
-    World3D* world = current_cam->get_world_3d().ptr();
-    if (!world) {
-        print_error("Failed to get World3D");
-        return;
-    }
-
-    PhysicsDirectSpaceState3D* space_state = world->get_direct_space_state();
-    if (!space_state) {
-        print_error("Failed to get SpaceState");
-        return;
-    }
-
-    Vector3 from = current_cam->project_ray_origin(mouse_position);
-    Vector3 to = current_cam->project_ray_origin(mouse_position)
-    + current_cam->project_ray_normal(mouse_position)*1000.0f;
-
-    Ref<PhysicsRayQueryParameters3D> params = PhysicsRayQueryParameters3D::create(from, to);
-
-    
-    print_line(mouse_position);
-    Dictionary ray_result = space_state->intersect_ray(params);
-    // UtilityFunctions::print("Raycast result: ", ray_result);
-    // UtilityFunctions::print("Ray from: ", params->get_from()," to: ", params->get_to());
-    // if (ray_result.size() > 0) {
-    //     Object* collider = ray_result["collider"];
-    //     if (Node* collider_node = cast_to<Node>(collider)) {
-    //         if (Anomaly* anomaly = cast_to<Anomaly>(collider_node->get_parent())) {
-    //             print_line("nevork");
-    //             anomaly->deactivate();
-    //             emit_signal("raycast_hit", anomaly);
-    //         }
-    //     }
-    // }
-    print_line(ray_result);
-    // if (ray_result.has("collider")) {
-    //     Object* collider = ray_result["collider"];
-    //     if (collider) {
-    //         Node* collider_node = Object::cast_to<Node>(collider);
-    //         if (collider_node) {
-    //             UtilityFunctions::print("Hit node: ", collider_node->get_name());
-                
-    //             // Проверяем родителя на аномалию
-    //             Anomaly* anomaly = Object::cast_to<Anomaly>(collider_node);
-    //             if (!anomaly) {
-    //                 anomaly = Object::cast_to<Anomaly>(collider_node->get_parent());
-    //             }
-                
-    //             if (anomaly) {
-    //                 UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
-    //                 anomaly->deactivate();
-    //                 emit_signal("raycast_hit", anomaly);
-    //             }
-    //         }
-    //     }
-    // } else {
-    //     UtilityFunctions::print("Raycast didn't hit anything");
-    // }
 }
 
 void CameraManager::handle_click(const Ref<InputEvent>& event) {
