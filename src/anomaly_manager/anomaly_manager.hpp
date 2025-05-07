@@ -27,13 +27,13 @@ public:
         anomalies_count = 0;
     }
 
+    int get_anomalies_count() const { return anomalies_count; }
     void set_anomalies_count(int i) { anomalies_count = i; }
-    int get_anomalies_count() { return anomalies_count; }
 
-    int get_max_active_anomalies() { return max_active_anomalies; }
+    int get_max_active_anomalies() const  { return max_active_anomalies; }
     void set_max_active_anomalies(int i) { max_active_anomalies = i; }
 
-    int get_active_anomalies_count() { return active_anomalies_count; }
+    int get_active_anomalies_count() const { return active_anomalies_count; }
     void set_active_anomalies_count(int i) { active_anomalies_count = i; }
 
     Anomaly* operator()(int i) { return anomalies[i]; }

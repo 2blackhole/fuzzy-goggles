@@ -28,7 +28,9 @@ void AnomalyManager::_bind_methods() {
 
 void AnomalyManager::_ready() {
     anomalies_count = 0;
+
     TypedArray vec = get_children();
+    
     for (int i = 0; i < vec.size(); ++i) {
         Anomaly* el = cast_to<Anomaly>(vec[i]);
         if (el) {

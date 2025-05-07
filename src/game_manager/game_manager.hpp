@@ -1,13 +1,18 @@
+#ifndef GAME_MANAGER
+#define GAME_MANAGER
+
 #include "../anomaly_manager/anomaly_manager.hpp"
 #include "../camera_manager/camera_manager.hpp"
 #include <godot_cpp/classes/node.hpp>
+
+using namespace godot;
 
 class GameManager : Node {
     GDCLASS(GameManager, Node);
 
 private:
-    CameraManager* camera_manager = nullptr;
     AnomalyManager* anomaly_manager = nullptr;
+    CameraManager* camera_manager = nullptr;
     float spawn_chance = 0.4f;
 
 protected:
@@ -26,4 +31,9 @@ public:
     float get_spawn_chance() const { return spawn_chance; }
 
     void try_spawn_anomaly_after_camera_switch();
+
+    // void start_game();
+    // void end_game();
 };
+
+#endif // GAME_MANAGER

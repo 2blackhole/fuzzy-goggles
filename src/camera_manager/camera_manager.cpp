@@ -1,7 +1,5 @@
 #include "camera_manager.hpp"
 
-
-
 using namespace godot;
 
 void CameraManager::_bind_methods() {    

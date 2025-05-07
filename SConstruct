@@ -67,9 +67,9 @@ Run the following command to download godot-cpp:
 env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
 
 env.Append(CPPPATH=["src/", "src/camera_manager/", "src/anomaly/", "src/anomaly_manager/"])
-#env.Append(CPPPATH=["src/camera/"])
+# , "src/game_manager/"
 sources = Glob("src/*.cpp") + Glob("src/camera_manager/*.cpp") + Glob("src/anomaly/*.cpp") + Glob("src/anomaly_manager/*.cpp")
-#sources = Glob("src/camera/*.cpp")
+# + Glob("src/game_manager/*.cpp")
 
 if env["target"] in ["editor", "template_debug"]:
     try:
