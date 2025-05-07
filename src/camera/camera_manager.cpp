@@ -7,7 +7,6 @@ using namespace godot;
 void CameraManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
     ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
-
     ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
     ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
     ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
@@ -61,9 +60,6 @@ void CameraManager::_physics_process(double delta) {
         params->set_collide_with_bodies(true);
 
         Dictionary ray_result = space_state->intersect_ray(params);
-        print_line(mouse_position);
-        spawn_debug_sphere(from, Color(0, 1, 0)); // Зеленая сфера в начале луча
-        spawn_debug_sphere(to, Color(1, 0, 0));   // Красная сфера в конце луча
         click = false;
         print_line(ray_result);
         if (ray_result.has("collider")) {
@@ -89,8 +85,6 @@ void CameraManager::_physics_process(double delta) {
             UtilityFunctions::print("Raycast didn't hit anything");
         }
     }
-
-    
 }
 
 void CameraManager::_input(const Ref<InputEvent>& event) {

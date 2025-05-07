@@ -1,5 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://yjnwgxlqbnte"]
 
+[ext_resource type="PackedScene" uid="uid://cfx1ajsyrcqmx" path="res://anomaly_manager.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://udow7n3ikopk" path="res://govninga/scene.gltf" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://daagio6e3ohng" path="res://models/Toilet pack.glb" id="4_1bvp3"]
 
@@ -22,8 +23,6 @@ dof_blur_far_distance = 42.08
 dof_blur_far_transition = -1.0
 dof_blur_near_distance = 0.01
 dof_blur_amount = 0.16
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_vonw3"]
 
 [node name="level" type="Node3D"]
 
@@ -54,42 +53,4 @@ transform = Transform3D(0.840567, -0.374939, 0.390983, 0, 0.72176, 0.692143, -0.
 attributes = SubResource("CameraAttributesPractical_oi3di")
 fov = 80.0
 
-[node name="AnomalyManager" type="AnomalyManager" parent="."]
-anomalies_count = 1
-
-[node name="Anomaly" type="Anomaly" parent="AnomalyManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08066, 0, 26.9145)
-disable_mode = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly"]
-
-[node name="Toilet pack" parent="AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("4_1bvp3")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
-shape = SubResource("SphereShape3D_vonw3")
-
-[node name="Anomaly2" type="Anomaly" parent="AnomalyManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56035, 0, 28.4423)
-disable_mode = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly2"]
-
-[node name="Toilet pack" parent="AnomalyManager/Anomaly2/MeshInstance3D" instance=ExtResource("4_1bvp3")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
-shape = SubResource("SphereShape3D_vonw3")
-
-[node name="Anomaly3" type="Anomaly" parent="AnomalyManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.963784, 0, -9.70828)
-disable_mode = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly3"]
-
-[node name="Toilet pack" parent="AnomalyManager/Anomaly3/MeshInstance3D" instance=ExtResource("4_1bvp3")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00775576, 0.274612, 0.325264)
-shape = SubResource("SphereShape3D_vonw3")
+[node name="AnomalyManager" parent="." instance=ExtResource("3_0b4ue")]

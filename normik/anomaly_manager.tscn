@@ -10,6 +10,7 @@ anomalies_count = 3
 script = ExtResource("1_mgwxe")
 
 [node name="Anomaly" type="Anomaly" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.081, 0, 26.914)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Anomaly"]
 
@@ -20,7 +21,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 shape = SubResource("SphereShape3D_mgwxe")
 
 [node name="AnomalyPines" type="Anomaly" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74268, -0.217095, -0.816885)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56, 0, 28.442)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyPines"]
 
@@ -31,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 shape = SubResource("SphereShape3D_mgwxe")
 
 [node name="AnomalySosines" type="Anomaly" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.257498, 1.11813, -0.836715)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.964, 0, -9.708)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalySosines"]
 
