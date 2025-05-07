@@ -24,7 +24,7 @@ dof_blur_far_transition = -1.0
 dof_blur_near_distance = 0.01
 dof_blur_amount = 0.16
 
-[node name="level" type="Node3D"]
+[node name="level" type="GameManager"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
@@ -54,3 +54,4 @@ attributes = SubResource("CameraAttributesPractical_oi3di")
 fov = 80.0
 
 [node name="AnomalyManager" parent="." instance=ExtResource("3_0b4ue")]
+script = null

@@ -7,7 +7,7 @@
 
 using namespace godot;
 
-class GameManager : Node {
+class GameManager : public Node {
     GDCLASS(GameManager, Node);
 
 private:
