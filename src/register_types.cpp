@@ -4,11 +4,9 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "summator.h"
-#include "camera/camera_manager.h"
-#include "anomaly/anomaly.h"
-#include "anomaly/anomaly_manager.h"
-
+#include "anomaly/anomaly.hpp"
+#include "anomaly_manager/anomaly_manager.hpp"
+#include "camera_manager/camera_manager.hpp"
 
 using namespace godot;
 
@@ -17,7 +15,6 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}	
-	GDREGISTER_CLASS(Summator);
 	GDREGISTER_CLASS(CameraManager);
 	GDREGISTER_CLASS(Anomaly);
 	GDREGISTER_CLASS(AnomalyManager);

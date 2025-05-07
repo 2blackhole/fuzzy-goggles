@@ -1,4 +1,4 @@
-#include "anomaly_manager.h"
+#include "anomaly_manager.hpp"
 #include <algorithm>
 
 void AnomalyManager::_bind_methods() {
@@ -20,12 +20,6 @@ void AnomalyManager::_bind_methods() {
     ClassDB::add_property("AnomalyManager", 
         PropertyInfo(Variant::INT, "active_anomalies_count", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR),
         "set_active_anomalies_count", "get_active_anomalies_count");
-
-    ClassDB::bind_method(D_METHOD("set_spawn_chance", "chance"), &AnomalyManager::set_spawn_chance);
-    ClassDB::bind_method(D_METHOD("get_spawn_chance"), &AnomalyManager::get_spawn_chance);
-    ClassDB::add_property("AnomalyManager", 
-        PropertyInfo(Variant::FLOAT, "spawn_chance", PROPERTY_HINT_RANGE, "0.0,1.0,0.01", PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR),
-        "set_spawn_chance", "get_spawn_chance");
 
     // Регистрация специального метода
     ClassDB::bind_method(D_METHOD("superpuperbingcheling_yehaopien_bingchelin", "value"), &AnomalyManager::superpuperbingcheling_yehaopien_bingchelin);

@@ -1,16 +1,18 @@
-#include "camera_manager.h"
+#include "camera_manager.hpp"
 
 
 
 using namespace godot;
 
-void CameraManager::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
-    ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
+void CameraManager::_bind_methods() {    
     ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
+
+    ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
+
+    ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
     ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
     ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
-
+    
     ADD_SIGNAL(MethodInfo("camera_switched", PropertyInfo(Variant::INT, "camera_index")));
     ADD_SIGNAL(MethodInfo("anomaly_clicked", PropertyInfo(Variant::OBJECT, "anomaly")));
 }
@@ -30,6 +32,23 @@ void CameraManager::_ready() {
     if (cameras.empty()) { return; }
 
     switch_to_camera(0);
+}
+
+
+void CameraManager::_input(const Ref<InputEvent>& event) {
+    if (event.is_null()) { return; }
+
+    UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
+
+    if (event->is_action_pressed("ui_right")) {
+        print_line("Switching to next camera...");
+        switch_to_next_camera();
+    } else if (event->is_action_pressed("ui_left")) {
+        print_line("Switching to previous camera...");
+        switch_to_previous_camera();
+    } else {
+        handle_click(event);
+    }
 }
 
 void CameraManager::_physics_process(double delta) {
@@ -65,6 +84,7 @@ void CameraManager::_physics_process(double delta) {
         if (ray_result.has("collider")) {
             Object* collider = ray_result["collider"];
             if (collider) {
+                
                 Node* collider_node = Object::cast_to<Node>(collider);
                 if (collider_node) {
                     UtilityFunctions::print("Hit node: ", collider_node->get_name());
@@ -87,40 +107,6 @@ void CameraManager::_physics_process(double delta) {
     }
 }
 
-void CameraManager::_input(const Ref<InputEvent>& event) {
-    if (event.is_null()) { return; }
-
-    UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
-
-    if (event->is_action_pressed("ui_right")) {
-        print_line("Switching to next camera...");
-        switch_to_next_camera();
-    } else if (event->is_action_pressed("ui_left")) {
-        print_line("Switching to previous camera...");
-        switch_to_previous_camera();
-    } else {
-        handle_click(event);
-    }
-}
-
-void CameraManager::switch_to_camera(int index) {
-    if (index < 0 || index >= cameras.size()) {
-        UtilityFunctions::printerr("CameraManager: Invalid camera index!");
-        return;
-    }
-    
-    // Деактивируем текущую камеру
-    if (current_active_camera_id != -1 && cameras[current_active_camera_id] != nullptr) {
-        cameras[current_active_camera_id]->set_current(false);
-    }
-    
-    // Активируем новую
-    current_active_camera_id = index;
-    cameras[index]->set_current(true);
-    
-    emit_signal("camera_switched", index);
-}
-
 void CameraManager::handle_click(const Ref<InputEvent>& event) {
     if (event.is_null() || current_active_camera_id == -1) {
         return;
@@ -133,6 +119,25 @@ void CameraManager::handle_click(const Ref<InputEvent>& event) {
                 mouse_position = mouse_event->get_position();
                 click = true;
             }
+}
+
+void CameraManager::switch_to_camera(int index) {
+    if (index < 0 || index >= cameras.size()) {
+        UtilityFunctions::printerr("CameraManager: Invalid camera index!");
+        return;
+    }
+
+    // Деактивируем текущую камеру
+    if (current_active_camera_id != -1 &&
+        cameras[current_active_camera_id] != nullptr) {
+        cameras[current_active_camera_id]->set_current(false);
+    }
+
+    // Активируем новую
+    current_active_camera_id = index;
+    cameras[index]->set_current(true);
+
+    emit_signal("camera_switched", index);
 }
 
 void CameraManager::switch_to_next_camera() {

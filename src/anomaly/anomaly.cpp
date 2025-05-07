@@ -1,4 +1,4 @@
-#include "anomaly.h"
+#include "anomaly.hpp"
 
 void Anomaly::_bind_methods() {
     ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &Anomaly::on_anomaly_deactivated); ADD_SIGNAL(MethodInfo("deactivated"));
