@@ -54,4 +54,3 @@ attributes = SubResource("CameraAttributesPractical_oi3di")
 fov = 80.0
 
 [node name="AnomalyManager" parent="." instance=ExtResource("3_0b4ue")]
-script = null

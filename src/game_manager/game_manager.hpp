@@ -30,7 +30,7 @@ public:
     void set_spawn_chance(float chance) { spawn_chance = CLAMP(chance, 0.0f, 1.0f); }
     float get_spawn_chance() const { return spawn_chance; }
 
-    void try_spawn_anomaly_after_camera_switch();
+    void try_spawn_anomaly_after_camera_switch(int camera_index = -1);
 
     // void start_game();
     // void end_game();
