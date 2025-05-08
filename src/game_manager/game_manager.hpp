@@ -13,11 +13,12 @@ class GameManager : public Node {
 private:
     AnomalyManager* anomaly_manager = nullptr;
     CameraManager* camera_manager = nullptr;
-    float base_spawn_chance = 0.4f;
+    float base_spawn_chance = 0.7f;
     float current_spawn_chance = 0.4f;
     float chance_reduction_factor = 0.5f;
+    int score = 0;
 
-  protected:
+protected:
     static void _bind_methods();
 
 public:

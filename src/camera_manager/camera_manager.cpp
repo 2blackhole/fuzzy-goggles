@@ -52,19 +52,19 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
 void CameraManager::_physics_process(double delta) {
     Camera3D* current_cam = cameras[current_active_camera_id];
     if (!current_cam) {
-        print_line("Penis");
+        print_line("_physics_process camera problem");
         return;
     }
 
     World3D* world = current_cam->get_world_3d().ptr();
     if (!world) {
-        print_error("Failed to get World3D");
+        print_error("_physics_process Failed to get World3D");
         return;
     }
 
     PhysicsDirectSpaceState3D* space_state = world->get_direct_space_state();
     if (!space_state) {
-        print_error("Failed to get SpaceState");
+        print_error("_physics_process Failed to get SpaceState");
         return;
     }
 
@@ -78,7 +78,7 @@ void CameraManager::_physics_process(double delta) {
 
         Dictionary ray_result = space_state->intersect_ray(params);
         click = false;
-        print_line(ray_result);
+        // print_line(ray_result);
         if (ray_result.has("collider")) {
             Object* collider = ray_result["collider"];
             if (collider) {
