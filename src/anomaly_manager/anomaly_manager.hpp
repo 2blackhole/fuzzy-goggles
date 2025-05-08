@@ -11,9 +11,9 @@ class AnomalyManager : public Node {
 
 private:
     std::vector<Anomaly*> anomalies;
-    int active_anomalies_count = 0;
-    int anomalies_count = 0;
-    int max_active_anomalies = 5;
+    int active_anomalies_count;
+    int anomalies_count;
+    int max_active_anomalies;
     
 protected:
     static void _bind_methods();

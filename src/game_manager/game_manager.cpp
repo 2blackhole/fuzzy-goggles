@@ -9,10 +9,11 @@ void GameManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_anomaly_manager", "manager"), &GameManager::set_anomaly_manager);
     ClassDB::bind_method(D_METHOD("get_anomaly_manager"), &GameManager::get_anomaly_manager);
 
-    ClassDB::bind_method(D_METHOD("set_spawn_chance", "chance"), &GameManager::set_spawn_chance);
-    ClassDB::bind_method(D_METHOD("get_spawn_chance"), &GameManager::get_spawn_chance);
+    ClassDB::bind_method(D_METHOD("set_spawn_chance", "chance"), &GameManager::set_base_spawn_chance);
+    ClassDB::bind_method(D_METHOD("get_spawn_chance"), &GameManager::get_base_spawn_chance);
 
     ClassDB::bind_method(D_METHOD("try_spawn_anomaly_after_camera_switch", "camera_index"), &GameManager::try_spawn_anomaly_after_camera_switch);
+    ClassDB::bind_method(D_METHOD("calculate_dynamic_spawn_chance"), &GameManager::calculate_dynamic_spawn_chance);
 }
 
 void GameManager::_ready() {
@@ -35,10 +36,17 @@ void GameManager::_ready() {
 }
 
 void GameManager::try_spawn_anomaly_after_camera_switch(int camera_index) {
-    if (!anomaly_manager || !camera_manager || !camera_index) {
+    if (!anomaly_manager || !camera_manager) {
         print_line("govno");
         return;
     }
+
+    if (!camera_index) {
+        print_line("asd");
+        return;
+    }
+
+    current_spawn_chance = calculate_dynamic_spawn_chance();
 
     if (anomaly_manager->get_active_anomalies_count() >= anomaly_manager->get_max_active_anomalies()) {
         print_line("peniks");
@@ -49,12 +57,11 @@ void GameManager::try_spawn_anomaly_after_camera_switch(int camera_index) {
     static std::mt19937 gen(rd());
     std::uniform_real_distribution<float> chance_dist(0.0f, 1.0f);
 
-    if (chance_dist(gen) < spawn_chance) {
+    if (chance_dist(gen) < current_spawn_chance) {
         int total_anomalies = anomaly_manager->get_anomalies_count();
         if (total_anomalies > 0) {
             std::uniform_int_distribution<int> index_dist(0, total_anomalies - 1);
             int anomaly_index = index_dist(gen);
-
             Anomaly* anomaly = (*anomaly_manager)(anomaly_index);
             if (anomaly && !anomaly->get_active()) {
                 anomaly->activate();
@@ -63,4 +70,16 @@ void GameManager::try_spawn_anomaly_after_camera_switch(int camera_index) {
             }
         }
     }
+}
+
+float GameManager::calculate_dynamic_spawn_chance() const {
+    if (!anomaly_manager) return base_spawn_chance;
+
+    int active = anomaly_manager->get_active_anomalies_count();
+    int max_active = anomaly_manager->get_max_active_anomalies();
+
+    if (max_active <= 0 || active <= 0) return base_spawn_chance;
+
+    float log_factor = log2(1 + active);
+    return base_spawn_chance * pow(1 - chance_reduction_factor, log_factor);
 }

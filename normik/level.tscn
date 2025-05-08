@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=7 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://cfx1ajsyrcqmx" path="res://anomaly_manager.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://udow7n3ikopk" path="res://govninga/scene.gltf" id="3_oi3di"]
@@ -16,13 +16,6 @@ background_mode = 2
 sky = SubResource("Sky_oi3di")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_oi3di"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 42.08
-dof_blur_far_transition = -1.0
-dof_blur_near_distance = 0.01
-dof_blur_amount = 0.16
 
 [node name="level" type="GameManager"]
 
@@ -50,7 +43,6 @@ fov = 80.0
 
 [node name="Camera_car" type="Camera3D" parent="CameraManager"]
 transform = Transform3D(0.840567, -0.374939, 0.390983, 0, 0.72176, 0.692143, -0.541708, -0.581793, 0.606688, -0.602536, 6.74731, 36.7683)
-attributes = SubResource("CameraAttributesPractical_oi3di")
 fov = 80.0
 
 [node name="AnomalyManager" parent="." instance=ExtResource("3_0b4ue")]

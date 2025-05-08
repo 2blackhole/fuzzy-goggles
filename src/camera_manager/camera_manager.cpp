@@ -12,7 +12,7 @@ void CameraManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
     
     ADD_SIGNAL(MethodInfo("camera_switched", PropertyInfo(Variant::INT, "camera_index")));
-    ADD_SIGNAL(MethodInfo("anomaly_clicked", PropertyInfo(Variant::OBJECT, "anomaly")));
+    // ADD_SIGNAL(MethodInfo("anomaly_clicked", PropertyInfo(Variant::OBJECT, "anomaly")));
 }
 
 void CameraManager::_ready() {
@@ -95,7 +95,7 @@ void CameraManager::_physics_process(double delta) {
                     if (anomaly) {
                         UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
                         anomaly->deactivate();
-                        emit_signal("raycast_hit", anomaly);
+                        // emit_signal("raycast_hit", anomaly);
                     }
                 }
             }
