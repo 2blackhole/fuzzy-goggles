@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgmjj0hvijery"]
+
+[ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 138.0
+offset_right = 50.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "ИГРАТЬ в ИГРУ"
+
+[node name="NekiyProstofilia" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Некий простофиля или кто"
+
+[node name="Exit" type="MenuButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = false
+text = "ВЫЙТИ из ИГРЫ"
+item_count = 2
+popup/item_0/text = "ты БАРАН и хочешь ВЫЙТИ?"
+popup/item_0/id = 0
+popup/item_1/text = "НАМАЛОЛЯМОНАМИНАЛО"
+popup/item_1/id = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NekiyProstofilia" to="." method="_on_nekiy_prostofilia_pressed"]

@@ -17,7 +17,7 @@ sky = SubResource("Sky_oi3di")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="level" type="GameManager"]
+[node name="Level" type="GameManager"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
