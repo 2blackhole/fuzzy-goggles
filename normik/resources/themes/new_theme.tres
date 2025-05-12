@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://blgdwp6loq1u5"]
+
+[ext_resource type="FontFile" uid="uid://taeydn32gwq0" path="res://fonts/3270NerdFontPropo-Regular.ttf" id="1_8k588"]
+
+[resource]
+default_font = ExtResource("1_8k588")
+default_font_size = 28
+VBoxContainer/constants/separation = 5

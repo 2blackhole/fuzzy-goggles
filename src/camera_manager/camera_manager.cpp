@@ -2,6 +2,19 @@
 
 using namespace godot;
 
+void CameraManager::_bind_methods() {    
+    ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
+
+    ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
+
+    ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
+    ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
+    ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
+    
+    ADD_SIGNAL(MethodInfo("camera_switched", PropertyInfo(Variant::INT, "camera_index")));
+    // ADD_SIGNAL(MethodInfo("anomaly_clicked", PropertyInfo(Variant::OBJECT, "anomaly")));
+}
+
 void CameraManager::_ready() {
     cameras.clear();
 
@@ -26,15 +39,16 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
     // UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
 
     if (event->is_action_pressed("ui_right")) {
+        print_line("Switching to next camera...");
         switch_to_next_camera();
     } else if (event->is_action_pressed("ui_left")) {
+        print_line("Switching to previous camera...");
         switch_to_previous_camera();
     } else {
         handle_click(event);
     }
 }
 
-// это надо переписать в гейм менеджер
 void CameraManager::_physics_process(double delta) {
     Camera3D* current_cam = cameras[current_active_camera_id];
     if (!current_cam) {
@@ -64,6 +78,7 @@ void CameraManager::_physics_process(double delta) {
 
         Dictionary ray_result = space_state->intersect_ray(params);
         click = false;
+        // print_line(ray_result);
         if (ray_result.has("collider")) {
             Object* collider = ray_result["collider"];
             if (collider) {
@@ -79,7 +94,8 @@ void CameraManager::_physics_process(double delta) {
                     
                     if (anomaly) {
                         UtilityFunctions::print("Hit anomaly: ", anomaly->get_name());
-                        emit_signal("anomaly_hit", anomaly);
+                        anomaly->deactivate();
+                        // emit_signal("raycast_hit", anomaly);
                     }
                 }
             }
