@@ -1,6 +1,6 @@
-/godot-cpp
 *obj
 *.os
+*.so
 .sconsign.dblite
 compile_commands.json
 vc140.pdb
