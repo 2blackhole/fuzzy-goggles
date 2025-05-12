@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	var exit_menu = $MarginContainer/VBoxContainer/Exit
+	var exit_menu = $TextureRect/MarginContainer/VBoxContainer/Exit
 	if exit_menu:
 		var popup = exit_menu.get_popup()
 		if popup:
