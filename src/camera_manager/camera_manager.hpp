@@ -24,7 +24,18 @@ private:
     bool click = false;
     
 protected:
-    static void _bind_methods();
+    static void _bind_methods() {    
+        ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
+    
+        ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
+    
+        ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
+        ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
+        ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
+        
+        ADD_SIGNAL(MethodInfo("camera_switched", PropertyInfo(Variant::INT, "camera_index")));
+        ADD_SIGNAL(MethodInfo("anomaly_hit", PropertyInfo(Variant::OBJECT, "anomaly")));
+    }
 
 public:
     void _ready() override;
