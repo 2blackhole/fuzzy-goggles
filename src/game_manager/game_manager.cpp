@@ -2,19 +2,6 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <random>
 
-void GameManager::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("set_camera_manager", "manager"), &GameManager::set_camera_manager);
-    ClassDB::bind_method(D_METHOD("get_camera_manager"), &GameManager::get_camera_manager);
-
-    ClassDB::bind_method(D_METHOD("set_anomaly_manager", "manager"), &GameManager::set_anomaly_manager);
-    ClassDB::bind_method(D_METHOD("get_anomaly_manager"), &GameManager::get_anomaly_manager);
-
-    ClassDB::bind_method(D_METHOD("set_spawn_chance", "chance"), &GameManager::set_base_spawn_chance);
-    ClassDB::bind_method(D_METHOD("get_spawn_chance"), &GameManager::get_base_spawn_chance);
-
-    ClassDB::bind_method(D_METHOD("try_spawn_anomaly_after_camera_switch", "camera_index"), &GameManager::try_spawn_anomaly_after_camera_switch);
-    ClassDB::bind_method(D_METHOD("calculate_dynamic_spawn_chance"), &GameManager::calculate_dynamic_spawn_chance);
-}
 
 void GameManager::_ready() {
     // чтобы не искало ноды пока в эдиторе -> живем без крашей
@@ -32,26 +19,34 @@ void GameManager::_ready() {
 
     if (camera_manager != nullptr) {
         camera_manager->connect("camera_switched", Callable(this, "try_spawn_anomaly_after_camera_switch"));
+        camera_manager->connect("anomaly_hit", Callable(this, "on_anomaly_hit"));
+    }
+}
+
+void GameManager::on_anomaly_hit(Anomaly* anomaly) {
+    if (!anomaly || !anomaly_manager) return;
+
+    if (anomaly->get_active()) {
+        anomaly->deactivate();
+        int asd = anomaly_manager->get_active_anomalies_count();
+        anomaly_manager->set_active_anomalies_count(asd - 1);
+        ++score;
+        print_line("Score: ", score);
     }
 }
 
 void GameManager::try_spawn_anomaly_after_camera_switch(int camera_index) {
     if (!anomaly_manager || !camera_manager) {
-        print_line("govno");
         return;
     }
 
-    if (!camera_index) {
-        print_line("asd");
+    if (anomaly_manager->get_active_anomalies_count() >= anomaly_manager->get_max_active_anomalies()) {
+        print_line("Max active anomalies reached");
         return;
     }
 
     current_spawn_chance = calculate_dynamic_spawn_chance();
-
-    if (anomaly_manager->get_active_anomalies_count() >= anomaly_manager->get_max_active_anomalies()) {
-        print_line("peniks");
-        return;
-    }
+    print_line("Current spawn chance:", current_spawn_chance);
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
@@ -78,7 +73,20 @@ float GameManager::calculate_dynamic_spawn_chance() const {
     int active = anomaly_manager->get_active_anomalies_count();
     int max_active = anomaly_manager->get_max_active_anomalies();
 
-    if (max_active <= 0 || active <= 0) return base_spawn_chance;
+    if (active <= 0) {
+        print_line("vau");
+        return base_spawn_chance;
+    }
+
+    if (max_active <= 0) {
+        print_line("PIZDA");
+        return base_spawn_chance;
+    }
+    
+    if (active >= max_active) {
+        print_line("neveroyatno");
+        return 0.0f;
+    }
 
     float log_factor = log2(1 + active);
     return base_spawn_chance * pow(1 - chance_reduction_factor, log_factor);

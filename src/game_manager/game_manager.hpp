@@ -13,16 +13,33 @@ class GameManager : public Node {
 private:
     AnomalyManager* anomaly_manager = nullptr;
     CameraManager* camera_manager = nullptr;
-    float base_spawn_chance = 0.7f;
+    float base_spawn_chance = 0.6f;
+
     float current_spawn_chance = 0.4f;
-    float chance_reduction_factor = 0.5f;
+    float chance_reduction_factor = 0.4f;
+    
     int score = 0;
 
 protected:
-    static void _bind_methods();
+    static void _bind_methods() {
+        ClassDB::bind_method(D_METHOD("set_camera_manager", "manager"), &GameManager::set_camera_manager);
+        ClassDB::bind_method(D_METHOD("get_camera_manager"), &GameManager::get_camera_manager);
+
+        ClassDB::bind_method(D_METHOD("set_anomaly_manager", "manager"), &GameManager::set_anomaly_manager);
+        ClassDB::bind_method(D_METHOD("get_anomaly_manager"), &GameManager::get_anomaly_manager);
+
+        ClassDB::bind_method(D_METHOD("set_spawn_chance", "chance"), &GameManager::set_base_spawn_chance);
+        ClassDB::bind_method(D_METHOD("get_spawn_chance"), &GameManager::get_base_spawn_chance);
+
+        ClassDB::bind_method(D_METHOD("try_spawn_anomaly_after_camera_switch", "camera_index"), &GameManager::try_spawn_anomaly_after_camera_switch);
+        ClassDB::bind_method(D_METHOD("calculate_dynamic_spawn_chance"), &GameManager::calculate_dynamic_spawn_chance);
+        ClassDB::bind_method(D_METHOD("on_anomaly_hit", "anomaly"), &GameManager::on_anomaly_hit);
+    }
 
 public:
     void _ready() override;
+
+    void on_anomaly_hit(Anomaly* anomaly);
 
     void set_camera_manager(CameraManager* manager) { camera_manager = manager; }
     CameraManager* get_camera_manager() const { return camera_manager; }
