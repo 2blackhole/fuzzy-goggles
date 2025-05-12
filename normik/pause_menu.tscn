@@ -12,36 +12,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(0.176471, 0.14902, 0.176471, 0.490196)
+size_flags_vertical = 4
+color = Color(0.231373, 0.231373, 0.337255, 0.466667)
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -16.0
-offset_right = 4.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+anchor_left = 0.435
+anchor_top = 0.422
+anchor_right = 0.63
+anchor_bottom = 0.656
+offset_right = -74.7601
+offset_bottom = -50.588
+scale = Vector2(1.5, 1.5)
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="Continue" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "ПРОДОЛЖИТЬ"
+text = "продолжить"
 
 [node name="Settings" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "ОТКРЫТЬ НАСТРОЙКИ"
+text = "найстройки"
 
 [node name="Exit_to_menu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "ВЫЙТИ в ГЛАВНОЕ МЕНЮ"
+text = "выйти в главное меню"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
