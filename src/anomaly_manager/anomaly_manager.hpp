@@ -11,31 +11,20 @@ class AnomalyManager : public Node {
 
 private:
     std::vector<Anomaly*> anomalies;
-    int anomalies_count;
-    int active_anomalies_count;
-    int max_active_anomalies;
+    int active_anomalies_count = 0;
+    int anomalies_count = 0;
+    int max_active_anomalies = 5;
 
   protected:
-    static void _bind_methods() {
-        ClassDB::bind_method(D_METHOD("set_anomalies_count", "count"), &AnomalyManager::set_anomalies_count);
-        ClassDB::bind_method(D_METHOD("get_anomalies_count"), &AnomalyManager::get_anomalies_count);
-    
-        ClassDB::bind_method(D_METHOD("set_max_active_anomalies", "max"), &AnomalyManager::set_max_active_anomalies);
-        ClassDB::bind_method(D_METHOD("get_max_active_anomalies"), &AnomalyManager::get_max_active_anomalies);
-    
-        ClassDB::bind_method(D_METHOD("set_active_anomalies_count", "count"), &AnomalyManager::set_active_anomalies_count);
-        ClassDB::bind_method(D_METHOD("get_active_anomalies_count"), &AnomalyManager::get_active_anomalies_count);
-    
-        ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &AnomalyManager::on_anomaly_deactivated);
-    }
+    static void _bind_methods();
 
 public:
     void _ready() override;
-
+    
     void _init() {
-        anomalies_count = 0;
-        active_anomalies_count = 0;
         max_active_anomalies = 5;
+        active_anomalies_count = 0;
+        anomalies_count = 0;
     }
 
     int get_anomalies_count() const { return anomalies_count; }
@@ -50,6 +39,8 @@ public:
     Anomaly* operator()(int i) { return anomalies[i]; }
 
     void on_anomaly_deactivated();
+    void superpuperbingcheling_yehaopien_bingchelin(
+        int SUPADUPA____CHINLGSDL_SURNAKAFLAFD);
 };
 
 #endif // ANOMALY_MANAGER
