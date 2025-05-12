@@ -5,7 +5,7 @@
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-
+anchors_preset = 0
 size_flags_horizontal = 4
 script = ExtResource("1_06t4h")
 metadata/_edit_use_anchors_ = true
