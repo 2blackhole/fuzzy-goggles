@@ -83,4 +83,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/AnomalySosines"]
 shape = SubResource("SphereShape3D_vonw3")
 
+[node name="Anomaly2" type="Anomaly" parent="AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.08529, 0, 32.188)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly2"]
+visible = false
+
+[node name="Toilet pack" parent="AnomalyManager/Anomaly2/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly2"]
+shape = SubResource("SphereShape3D_vonw3")
+disabled = true
+
+[node name="Anomaly3" type="Anomaly" parent="AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.89147, 0, -13.3266)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly3"]
+visible = false
+
+[node name="Toilet pack" parent="AnomalyManager/Anomaly3/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly3"]
+shape = SubResource("SphereShape3D_vonw3")
+disabled = true
+
+[node name="Anomaly4" type="Anomaly" parent="AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80504, 0, 31.0958)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly4"]
+visible = false
+
+[node name="Toilet pack" parent="AnomalyManager/Anomaly4/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly4"]
+shape = SubResource("SphereShape3D_vonw3")
+disabled = true
+
 [node name="CanvasLayer" parent="." instance=ExtResource("3_0b4ue")]
