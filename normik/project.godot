@@ -26,3 +26,7 @@ project/assembly_name="normik"
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="uid://blgdwp6loq1u5"

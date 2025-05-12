@@ -5,7 +5,7 @@
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+
 size_flags_horizontal = 4
 script = ExtResource("1_06t4h")
 metadata/_edit_use_anchors_ = true
@@ -13,8 +13,6 @@ metadata/_edit_use_anchors_ = true
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
 texture = ExtResource("2_7vrkn")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
@@ -22,17 +20,6 @@ metadata/_edit_use_anchors_ = true
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
 clip_contents = true
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -114.5
-offset_top = -50.5
-offset_right = 114.5
-offset_bottom = 50.5
-grow_horizontal = 2
-grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
@@ -45,17 +32,17 @@ text = "ИГРАТЬ в ИГРУ"
 
 [node name="NekiyProstofilia" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Некий простофиля или кто"
+text = "некий ПРОСТОФИЛЯ"
 
 [node name="Exit" type="MenuButton" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 toggle_mode = false
-text = "ВЫЙТИ из ИГРЫ"
+text = "ВЫЙТИ???"
 flat = false
 item_count = 2
-popup/item_0/text = "НАМАЛОЛЯМОНАМИНАЛО"
+popup/item_0/text = "НАММАЛОЛЯМАНОМИНАЛО"
 popup/item_0/id = 0
-popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ?"
+popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ???"
 popup/item_1/id = 1
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]
