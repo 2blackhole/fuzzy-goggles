@@ -26,8 +26,10 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
     // UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
 
     if (event->is_action_pressed("ui_right")) {
+        print_line("Switching to next camera...");
         switch_to_next_camera();
     } else if (event->is_action_pressed("ui_left")) {
+        print_line("Switching to previous camera...");
         switch_to_previous_camera();
     } else {
         handle_click(event);
