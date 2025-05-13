@@ -28,7 +28,8 @@ protected:
         ClassDB::bind_method(D_METHOD("handle_click"), &CameraManager::handle_click);
     
         ClassDB::bind_method(D_METHOD("get_current_camera_index"), &CameraManager::get_current_camera_index);
-    
+        ClassDB::bind_method(D_METHOD("get_camera_count"), &CameraManager::get_camera_count);
+
         ClassDB::bind_method(D_METHOD("switch_to_camera", "index"), &CameraManager::switch_to_camera);
         ClassDB::bind_method(D_METHOD("switch_to_next_camera"), &CameraManager::switch_to_next_camera);
         ClassDB::bind_method(D_METHOD("switch_to_previous_camera"), &CameraManager::switch_to_previous_camera);
@@ -49,6 +50,7 @@ public:
     void handle_click(const Ref<InputEvent>& event);
 
     int get_current_camera_index() const { return current_active_camera_id; }
+    int get_camera_count() const { return cameras.size(); }
 
     void switch_to_camera(int index);
     void switch_to_next_camera();

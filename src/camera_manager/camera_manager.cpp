@@ -125,9 +125,11 @@ void CameraManager::switch_to_camera(int index) {
 void CameraManager::switch_to_next_camera() {
     if (cameras.empty()) return;
     switch_to_camera((current_active_camera_id + 1) % cameras.size());
+    print_line(current_active_camera_id);
 }
 
 void CameraManager::switch_to_previous_camera() {
     if (cameras.empty()) return;
     switch_to_camera((current_active_camera_id - 1) % cameras.size());
+    print_line(current_active_camera_id);
 }

@@ -19,7 +19,15 @@ private:
     static int id;
 
 protected:
-    static void _bind_methods();
+    static void _bind_methods() {
+        ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &Anomaly::on_anomaly_deactivated);
+        ADD_SIGNAL(MethodInfo("deactivated"));
+
+        ClassDB::bind_method(D_METHOD("activate"), &Anomaly::activate);
+        ClassDB::bind_method(D_METHOD("deactivate"), &Anomaly::deactivate);
+        ClassDB::bind_method(D_METHOD("get_active"), &Anomaly::get_active);
+        ClassDB::bind_method(D_METHOD("update_visible_state"), &Anomaly::update_visible_state);
+    }
 
 public:
     void _ready() override;
