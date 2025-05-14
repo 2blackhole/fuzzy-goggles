@@ -1,15 +1,13 @@
 #ifndef CAMERA_MANAGER
 #define CAMERA_MANAGER
 
-#include <godot_cpp/classes/camera3d.hpp>
+#include <vector>
+
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/input_event_mouse_button.hpp>
-#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/physics_direct_space_state3d.hpp>
 #include <godot_cpp/classes/physics_ray_query_parameters3d.hpp>
 #include <godot_cpp/classes/world3d.hpp>
-#include <godot_cpp/core/class_db.hpp>
-#include <vector>
 
 #include "../anomaly/anomaly.hpp"
 #include "../camera/camera.hpp"

@@ -4,7 +4,6 @@
 
 
 void GameManager::_ready() {
-    // чтобы не искало ноды пока в эдиторе -> живем без крашей
     if (Engine::get_singleton()->is_editor_hint()) {
         return;
     }
@@ -19,8 +18,7 @@ void GameManager::_ready() {
 
 void GameManager::_process(double delta) {
     time_accum += delta;
-    if (time_accum >= 0.1) {
-        // print_line("otladka");
+    if (time_accum >= 1.0) {
         if (camera_manager) {
             int current_cam_index = camera_manager->get_current_camera_index();
             static std::random_device rd;
@@ -58,14 +56,12 @@ void GameManager::try_spawn_anomaly() {
         return;
     }            
 
-
     current_spawn_chance = calculate_dynamic_spawn_chance();
     print_line("Current spawn chance:", current_spawn_chance);
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
     std::uniform_real_distribution<double> chance_dist(0.0, 1.0);
-
 
     if (chance_dist(gen) < current_spawn_chance) {
         int total_anomalies = anomaly_manager->get_anomalies_count();
@@ -90,9 +86,6 @@ void GameManager::try_spawn_anomaly() {
 }
 
 double GameManager::calculate_dynamic_spawn_chance() const {
-    //if (!anomaly_manager) return base_spawn_chance;
-
-
     if (total_active_anomalies <= 0) {
         print_line("active anom <= 0");
         return base_spawn_chance;
