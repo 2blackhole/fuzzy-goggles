@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgmjj0hvijery"]
 
 [ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://ditv74sy6mpil" path="res://govninga/satoru_boom.jpg" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://mwqgvhk61t61" path="res://govninga/randy-tarampi-U2eUlPEKIgU-unsplash.jpg" id="2_7vrkn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -29,10 +29,14 @@ metadata/_edit_use_anchors_ = true
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.40929
-anchor_top = 0.476043
-anchor_right = 0.609991
-anchor_bottom = 0.632148
+anchor_left = 0.088
+anchor_top = 0.155
+anchor_right = 0.307
+anchor_bottom = 0.419
+offset_left = -0.408051
+offset_top = -0.285004
+offset_right = -100.287
+offset_bottom = -100.093
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
@@ -41,6 +45,10 @@ layout_mode = 2
 [node name="Play" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "ИГРАТЬ в ИГРУ"
+
+[node name="Settings" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Найстройки"
 
 [node name="NekiyProstofilia" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -58,4 +66,5 @@ popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ???"
 popup/item_1/id = 1
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/NekiyProstofilia" to="." method="_on_nekiy_prostofilia_pressed"]

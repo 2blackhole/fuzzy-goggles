@@ -1,3 +1,4 @@
+# main_menu.gd
 extends Control
 
 func _ready():
@@ -10,11 +11,13 @@ func _ready():
 			push_error("PopupMenu у Exit не найден!")
 	else:
 		push_error("Кнопка Exit не найдена или не MenuButton!")
+	
+	# Устанавливаем сцену возврата как главное меню
+	Global.return_scene_path = "res://main_menu.tscn"
 
 func _on_Exit_menu_selected(id):
 	match id:
 		0:
-			print("SISKI")
 			get_tree().change_scene_to_file("res://main_menu.tscn")
 		1:
 			get_tree().quit()
@@ -24,3 +27,9 @@ func _on_IGRAT_V_IGRU_pressed_ching_chong_bing():
 
 func _on_nekiy_prostofilia_pressed():
 	pass
+	
+
+func _on_settings_pressed() -> void:
+	# Перед переходом в настройки сохраняем текущую сцену
+	Global.return_scene_path = "res://main_menu.tscn"
+	get_tree().change_scene_to_file("res://settings_menu.tscn")
