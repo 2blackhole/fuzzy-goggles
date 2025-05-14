@@ -15,7 +15,7 @@ void AnomalyManager::_ready() {
     anomalies_count = anomalies.size();
     print_line("anomalies_count: ", anomalies_count);
     print_line("active_anomalies_count: ", active_anomalies_count);
-    print_line("max_active_anomalies: ", max_active_anomalies);
+    // print_line("max_active_anomalies: ", max_active_anomalies);
 }
 
 void AnomalyManager::on_anomaly_deactivated() {

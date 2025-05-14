@@ -10,7 +10,9 @@
 #include <godot_cpp/classes/world3d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <vector>
+
 #include "../anomaly/anomaly.hpp"
+#include "../camera/camera.hpp"
 
 using namespace godot;
 
@@ -18,7 +20,7 @@ class CameraManager : public Node {
     GDCLASS(CameraManager, Node);
     
 private:
-    std::vector<Camera3D*> cameras;
+    std::vector<CameraP*> cameras;
     int current_active_camera_id = -1;
     Vector2 mouse_position;
     bool click = false;
@@ -55,6 +57,9 @@ public:
     void switch_to_camera(int index);
     void switch_to_next_camera();
     void switch_to_previous_camera();
+
+    CameraP* operator[](int i) {return cameras[i];}
+    CameraP* operator()(int i) {return cameras[i];}
 };
 
 #endif // CAMERA_MANAGER

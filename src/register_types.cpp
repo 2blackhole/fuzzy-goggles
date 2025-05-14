@@ -8,6 +8,7 @@
 #include "anomaly_manager/anomaly_manager.hpp"
 #include "camera_manager/camera_manager.hpp"
 #include "game_manager/game_manager.hpp"
+#include "camera/camera.hpp"
 
 using namespace godot;
 
@@ -20,6 +21,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(AnomalyManager);
 	GDREGISTER_CLASS(GameManager);
 	GDREGISTER_CLASS(Anomaly);
+	GDREGISTER_CLASS(CameraP);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

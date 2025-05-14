@@ -8,7 +8,7 @@ void CameraManager::_ready() {
     TypedArray<Node> children = get_children();
 
     for (int i = 0; i < children.size(); ++i) {
-        if (Camera3D* camera = Object::cast_to<Camera3D>(children[i])) {
+        if (CameraP* camera = Object::cast_to<CameraP>(children[i])) {
             cameras.push_back(camera);
             UtilityFunctions::print("Registered camera: ",camera->get_name());
         }

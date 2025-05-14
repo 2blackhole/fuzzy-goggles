@@ -38,92 +38,94 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.364
 
 [node name="CameraManager" type="CameraManager" parent="."]
 
-[node name="Camera_moped" type="Camera3D" parent="CameraManager"]
+[node name="Camera_moped" type="CameraP" parent="CameraManager"]
 transform = Transform3D(-0.482701, 0.464095, -0.742708, 4.40855e-08, 0.848048, 0.529919, 0.875785, 0.255793, -0.409354, -8.34665, 5.38536, -18.12)
 current = true
 fov = 80.0
 
-[node name="Camera_car" type="Camera3D" parent="CameraManager"]
+[node name="AnomalyManager" type="AnomalyManager" parent="CameraManager/Camera_moped"]
+
+[node name="AnomalySosines" type="Anomaly" parent="CameraManager/Camera_moped/AnomalyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.964, 0, -9.708)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_moped/AnomalyManager/AnomalySosines"]
+visible = false
+
+[node name="Toilet pack" parent="CameraManager/Camera_moped/AnomalyManager/AnomalySosines/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_moped/AnomalyManager/AnomalySosines"]
+shape = SubResource("SphereShape3D_vonw3")
+disabled = true
+
+[node name="Anomaly3" type="Anomaly" parent="CameraManager/Camera_moped/AnomalyManager"]
+transform = Transform3D(1, 5.96046e-08, 4.76837e-07, -3.8743e-07, 1, 2.83122e-07, 2.98023e-08, 2.98023e-08, 1, -2.89147, -9.53674e-07, -13.3266)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_moped/AnomalyManager/Anomaly3"]
+visible = false
+
+[node name="Toilet pack" parent="CameraManager/Camera_moped/AnomalyManager/Anomaly3/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_moped/AnomalyManager/Anomaly3"]
+shape = SubResource("SphereShape3D_vonw3")
+disabled = true
+
+[node name="Camera_car" type="CameraP" parent="CameraManager"]
 transform = Transform3D(0.840567, -0.374939, 0.390983, 0, 0.72176, 0.692143, -0.541708, -0.581793, 0.606688, -0.602536, 6.74731, 36.7683)
 fov = 80.0
 
-[node name="AnomalyManager" type="AnomalyManager" parent="."]
+[node name="AnomalyManager" type="AnomalyManager" parent="CameraManager/Camera_car"]
 
-[node name="Anomaly" type="Anomaly" parent="AnomalyManager"]
+[node name="Anomaly" type="Anomaly" parent="CameraManager/Camera_car/AnomalyManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.081, 0, 26.914)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly"]
 visible = false
 
-[node name="Toilet pack" parent="AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+[node name="Toilet pack" parent="CameraManager/Camera_car/AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly"]
 shape = SubResource("SphereShape3D_vonw3")
 disabled = true
 
-[node name="AnomalyPines" type="Anomaly" parent="AnomalyManager"]
+[node name="AnomalyPines" type="Anomaly" parent="CameraManager/Camera_car/AnomalyManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56, 0, 28.442)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/AnomalyPines"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_car/AnomalyManager/AnomalyPines"]
 visible = false
 
-[node name="Toilet pack" parent="AnomalyManager/AnomalyPines/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+[node name="Toilet pack" parent="CameraManager/Camera_car/AnomalyManager/AnomalyPines/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/AnomalyPines"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/AnomalyPines"]
 shape = SubResource("SphereShape3D_vonw3")
 disabled = true
 
-[node name="AnomalySosines" type="Anomaly" parent="AnomalyManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.964, 0, -9.708)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/AnomalySosines"]
-visible = false
-
-[node name="Toilet pack" parent="AnomalyManager/AnomalySosines/MeshInstance3D" instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/AnomalySosines"]
-shape = SubResource("SphereShape3D_vonw3")
-disabled = true
-
-[node name="Anomaly2" type="Anomaly" parent="AnomalyManager"]
+[node name="Anomaly2" type="Anomaly" parent="CameraManager/Camera_car/AnomalyManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.08529, 0, 32.188)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly2"]
 visible = false
 
-[node name="Toilet pack" parent="AnomalyManager/Anomaly2/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+[node name="Toilet pack" parent="CameraManager/Camera_car/AnomalyManager/Anomaly2/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly2"]
 shape = SubResource("SphereShape3D_vonw3")
 disabled = true
 
-[node name="Anomaly3" type="Anomaly" parent="AnomalyManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.89147, 0, -13.3266)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly3"]
-visible = false
-
-[node name="Toilet pack" parent="AnomalyManager/Anomaly3/MeshInstance3D" instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly3"]
-shape = SubResource("SphereShape3D_vonw3")
-disabled = true
-
-[node name="Anomaly4" type="Anomaly" parent="AnomalyManager"]
+[node name="Anomaly4" type="Anomaly" parent="CameraManager/Camera_car/AnomalyManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80504, 0, 31.0958)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnomalyManager/Anomaly4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly4"]
 visible = false
 
-[node name="Toilet pack" parent="AnomalyManager/Anomaly4/MeshInstance3D" instance=ExtResource("4_1bvp3")]
+[node name="Toilet pack" parent="CameraManager/Camera_car/AnomalyManager/Anomaly4/MeshInstance3D" instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153312, -0.132149, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnomalyManager/Anomaly4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/Anomaly4"]
 shape = SubResource("SphereShape3D_vonw3")
 disabled = true
 

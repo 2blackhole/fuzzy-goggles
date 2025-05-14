@@ -8,15 +8,9 @@ void GameManager::_ready() {
     if (Engine::get_singleton()->is_editor_hint()) {
         return;
     }
-
     if (camera_manager == nullptr) {
         camera_manager = Object::cast_to<CameraManager>(get_node_or_null("CameraManager"));
     }
-
-    if (anomaly_manager == nullptr) {
-        anomaly_manager = Object::cast_to<AnomalyManager>(get_node_or_null("AnomalyManager"));
-    }
-
     if (camera_manager != nullptr) {
         camera_manager->connect("camera_switched", Callable(this, "try_spawn_anomaly_after_camera_switch"));
         camera_manager->connect("anomaly_hit", Callable(this, "on_anomaly_hit"));
@@ -25,11 +19,18 @@ void GameManager::_ready() {
 
 void GameManager::_process(double delta) {
     time_accum += delta;
-    if (time_accum >= 1.0) {
-        print_line("otladka");
+    if (time_accum >= 0.1) {
+        // print_line("otladka");
         if (camera_manager) {
             int current_cam_index = camera_manager->get_current_camera_index();
-            try_spawn_anomaly(current_cam_index);
+            static std::random_device rd;
+            static std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> chance_dist(0, camera_manager->get_camera_count() - 2);
+            int rand_anomaly_manager = chance_dist(gen);
+            if (rand_anomaly_manager >= current_cam_index) ++rand_anomaly_manager;
+            anomaly_manager = (*camera_manager)[rand_anomaly_manager]->get_anomaly_manager();
+            try_spawn_anomaly();
+
         }
         time_accum = 0.0;
     }
@@ -47,15 +48,16 @@ void GameManager::on_anomaly_hit(Anomaly* anomaly) {
     }
 }
 
-void GameManager::try_spawn_anomaly(int camera_index) {
+void GameManager::try_spawn_anomaly() {
     if (!anomaly_manager || !camera_manager) {
         return;
     }
 
-    if (anomaly_manager->get_active_anomalies_count() >= anomaly_manager->get_max_active_anomalies()) {
+    if (total_active_anomalies >= max_active_anomalies) {
         print_line("Max active anomalies reached");
         return;
-    }
+    }            
+
 
     current_spawn_chance = calculate_dynamic_spawn_chance();
     print_line("Current spawn chance:", current_spawn_chance);
@@ -71,7 +73,6 @@ void GameManager::try_spawn_anomaly(int camera_index) {
             std::uniform_int_distribution<int> index_dist(0, total_anomalies - 1);
             int anomaly_index = index_dist(gen);
             Anomaly* anomaly = (*anomaly_manager)(anomaly_index);
-            
             if (anomaly && !anomaly->get_active()) {
                 anomaly->activate();
                 anomaly_manager->set_active_anomalies_count(anomaly_manager->get_active_anomalies_count() + 1);
@@ -79,29 +80,34 @@ void GameManager::try_spawn_anomaly(int camera_index) {
             }
         }
     }
+
+    int tmp_count = 0;
+    for (int i = 0; i < camera_manager->get_camera_count(); i++) {
+        tmp_count += (*camera_manager)[i]->get_anomaly_manager()->get_active_anomalies_count();
+    }
+    total_active_anomalies = tmp_count;
+    print_line_rich("\nTOTAL ACTIVE ANOMALIES : ", total_active_anomalies, "\n");
 }
 
 double GameManager::calculate_dynamic_spawn_chance() const {
-    if (!anomaly_manager) return base_spawn_chance;
+    //if (!anomaly_manager) return base_spawn_chance;
 
-    int active = anomaly_manager->get_active_anomalies_count();
-    int max_active = anomaly_manager->get_max_active_anomalies();
 
-    if (active <= 0) {
+    if (total_active_anomalies <= 0) {
         print_line("active anom <= 0");
         return base_spawn_chance;
     }
 
-    if (max_active <= 0) {
+    if (max_active_anomalies <= 0) {
         print_line("max act <= 0");
         return base_spawn_chance;
     }
 
-    if (active >= max_active) {
+    if (total_active_anomalies >= max_active_anomalies) {
         print_line("act >= max act");
         return 0.0;
     }
 
-    double log_factor = log2(1 + active);
+    double log_factor = log2(1 + total_active_anomalies);
     return base_spawn_chance * pow(1 - chance_reduction_factor, log_factor);
 }
