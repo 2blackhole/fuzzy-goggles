@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=29 format=3 uid="uid://yjnwgxlqbnte"]
 
 [ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://pause_menu.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://cvaa3iaghvhfu" path="res://models/realistic_pig/scene.gltf" id="3_1ainy"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://4nadgs2jeibl" path="res://models/air-hockey_table/scene.gltf" id="5_1ainy"]
 [ext_resource type="PackedScene" uid="uid://w4l0ctfksgei" path="res://models/tombstone/scene.gltf" id="6_2orkt"]
 [ext_resource type="PackedScene" uid="uid://p2a05hqxkxio" path="res://models/fox_mulder/scene.gltf" id="7_8cye3"]
+[ext_resource type="PackedScene" uid="uid://ccrdv8onm8ewa" path="res://models/t-72b3_tank/scene.gltf" id="7_aicyk"]
 [ext_resource type="PackedScene" uid="uid://bslcmhp7j3hnd" path="res://models/skeleton_in_cage/scene.gltf" id="8_2orkt"]
 [ext_resource type="PackedScene" uid="uid://5xrjuef4bfv8" path="res://models/skeleton/scene.gltf" id="9_8cye3"]
+[ext_resource type="PackedScene" uid="uid://cbmh41epddxjf" path="res://models/joker/scene.gltf" id="12_8b0r0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -42,6 +44,9 @@ size = Vector3(0.637634, 1.25104, 0.269958)
 [sub_resource type="SphereShape3D" id="SphereShape3D_8b0r0"]
 radius = 0.396735
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b0r0"]
+size = Vector3(6.99466, 1.91455, 3.50842)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_vonw3"]
 radius = 0.496038
 
@@ -59,6 +64,10 @@ radius = 0.297852
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2orkt"]
 radius = 0.216381
 height = 2.03376
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h6smj"]
+radius = 0.423217
+height = 2.89148
 
 [node name="Level" type="GameManager"]
 
@@ -152,8 +161,22 @@ transform = Transform3D(1.23622, -1.44991e-09, -4.47035e-08, 2.25138e-09, 1.1844
 shape = SubResource("SphereShape3D_8b0r0")
 disabled = true
 
+[node name="TANK" type="Anomaly" parent="CameraManager/Camera_moped/AnomalyManager"]
+transform = Transform3D(0.412913, 0, 0.910771, 0, 1, 0, -0.910771, 0, 0.412913, -4.80024, 0.53601, -1.3702)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_moped/AnomalyManager/TANK"]
+visible = false
+
+[node name="Sketchfab_Scene" parent="CameraManager/Camera_moped/AnomalyManager/TANK/MeshInstance3D" instance=ExtResource("7_aicyk")]
+transform = Transform3D(0.569624, 0, -0.821905, 0, 1, 0, 0.821905, 0, 0.569624, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_moped/AnomalyManager/TANK"]
+transform = Transform3D(0.813547, 0, 0.581498, 0, 1, 0, -0.581498, 0, 0.813547, -0.449759, 0.67784, 0.493211)
+shape = SubResource("BoxShape3D_8b0r0")
+disabled = true
+
 [node name="Camera_car" type="CameraP" parent="CameraManager"]
-transform = Transform3D(0.840567, -0.374939, 0.390983, 0, 0.72176, 0.692143, -0.541708, -0.581793, 0.606688, -0.602536, 6.74731, 36.7683)
+transform = Transform3D(0.647688, -0.364076, 0.66929, -0.0131948, 0.87295, 0.487631, -0.761791, -0.324664, 0.560596, 0.0640298, 6.74731, 37.0507)
 fov = 80.0
 
 [node name="AnomalyManager" type="AnomalyManager" parent="CameraManager/Camera_car"]
@@ -225,6 +248,20 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/skitel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.841002, 0)
 shape = SubResource("CapsuleShape3D_2orkt")
+disabled = true
+
+[node name="JOKER" type="Anomaly" parent="CameraManager/Camera_car/AnomalyManager"]
+transform = Transform3D(0.404718, 0, 0.690075, 0, 0.8, 0, -0.690075, 0, 0.404718, -11.8889, 6.60372, 28.8476)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/Camera_car/AnomalyManager/JOKER"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+
+[node name="Sketchfab_Scene" parent="CameraManager/Camera_car/AnomalyManager/JOKER/MeshInstance3D" instance=ExtResource("12_8b0r0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/Camera_car/AnomalyManager/JOKER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274277, 1.49569, 0.0758705)
+shape = SubResource("CapsuleShape3D_h6smj")
 disabled = true
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_0b4ue")]

@@ -14,13 +14,14 @@ private:
     CameraManager* camera_manager = nullptr;
     AnomalyManager* anomaly_manager = nullptr;
 
-    double base_spawn_chance = 0.6;
-    double current_spawn_chance = 0.4;
-    double chance_reduction_factor = 0.4;
+    double base_spawn_chance = 0.7;
+    double current_spawn_chance = 0.55;
+    double chance_reduction_factor = 0.35;
 
+    double init_delay = 0.0;
     double time_accum = 0;
 
-    int max_active_anomalies =7;
+    int max_active_anomalies = 10;
     int total_active_anomalies = 0;
 
     int score = 0;

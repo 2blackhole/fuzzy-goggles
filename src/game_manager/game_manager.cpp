@@ -18,7 +18,13 @@ void GameManager::_ready() {
 
 void GameManager::_process(double delta) {
     time_accum += delta;
-    if (time_accum >= 1.0) {
+
+    if (init_delay <= 10.0) {
+        init_delay += delta;
+        return;
+    }
+
+    if (time_accum >= 1.5) {
         if (camera_manager) {
             int current_cam_index = camera_manager->get_current_camera_index();
             static std::random_device rd;
@@ -28,7 +34,6 @@ void GameManager::_process(double delta) {
             if (rand_anomaly_manager >= current_cam_index) ++rand_anomaly_manager;
             anomaly_manager = (*camera_manager)[rand_anomaly_manager]->get_anomaly_manager();
             try_spawn_anomaly();
-
         }
         time_accum = 0.0;
     }
@@ -39,6 +44,7 @@ void GameManager::on_anomaly_hit(Anomaly* anomaly) {
 
     if (anomaly->get_active()) {
         anomaly->deactivate();
+        anomaly->set_called(true);
         int asd = anomaly_manager->get_active_anomalies_count();
         anomaly_manager->set_active_anomalies_count(asd - 1);
         ++score;
@@ -69,7 +75,7 @@ void GameManager::try_spawn_anomaly() {
             std::uniform_int_distribution<int> index_dist(0, total_anomalies - 1);
             int anomaly_index = index_dist(gen);
             Anomaly* anomaly = (*anomaly_manager)(anomaly_index);
-            if (anomaly && !anomaly->get_active()) {
+            if (anomaly && !anomaly->get_active() && !anomaly->get_called()) {
                 anomaly->activate();
                 anomaly_manager->set_active_anomalies_count(anomaly_manager->get_active_anomalies_count() + 1);
                 print_line("Anomaly activated", anomaly->get_name());
