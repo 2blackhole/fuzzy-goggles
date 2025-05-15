@@ -20,7 +20,7 @@ private:
 
     double time_accum = 0;
 
-    int max_active_anomalies = 7;
+    int max_active_anomalies =7;
     int total_active_anomalies = 0;
 
     int score = 0;
