@@ -20,7 +20,7 @@ private:
 
     double time_accum = 0;
 
-    int max_active_anomalies = 6;
+    int max_active_anomalies = 7;
     int total_active_anomalies = 0;
 
     int score = 0;
@@ -35,6 +35,8 @@ protected:
 public:
     void _ready() override;
     void _process(double delta) override;
+
+    int get_score() const { return score; }
 
     // логарифмическая зависимость кол-ва аномалий
     // и вероятности спавна
