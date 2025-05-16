@@ -15,32 +15,25 @@ private:
     CollisionShape3D* collision_shape = nullptr;
     MeshInstance3D* mesh = nullptr;
     bool is_active = false;
-
-    static int id;
+    bool was_called = false;
 
 protected:
     static void _bind_methods() {
-        ClassDB::bind_method(D_METHOD("on_anomaly_deactivated"), &Anomaly::on_anomaly_deactivated);
-        ADD_SIGNAL(MethodInfo("deactivated"));
-
         ClassDB::bind_method(D_METHOD("activate"), &Anomaly::activate);
         ClassDB::bind_method(D_METHOD("deactivate"), &Anomaly::deactivate);
         ClassDB::bind_method(D_METHOD("get_active"), &Anomaly::get_active);
+        ClassDB::bind_method(D_METHOD("set_called", "call"), &Anomaly::set_called);
+        ClassDB::bind_method(D_METHOD("get_called"), &Anomaly::get_called);
         ClassDB::bind_method(D_METHOD("update_visible_state"), &Anomaly::update_visible_state);
     }
 
 public:
     void _ready() override;
 
-    void _init() {
-        collision_shape = nullptr;
-        mesh = nullptr;
-        is_active = false;
-    }
-
-    void on_anomaly_deactivated() { emit_signal("deactivated"); }
-
     bool get_active() const { return is_active; }
+
+    void set_called(bool call) { was_called = call; }
+    bool get_called() const { return was_called; }
 
     void activate();
     void deactivate();

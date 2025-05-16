@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-AnomalyManager* CameraP::get_anomaly_manager() { return anomaly_manager; }
+AnomalyManager* CameraP::get_anomaly_manager() const { return anomaly_manager; }
 
 void CameraP::_ready() {
     TypedArray vec = get_children();

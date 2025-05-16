@@ -1,0 +1,11 @@
+Model Information:
+* title:	skeleton psx lowpoly
+* source:	https://sketchfab.com/3d-models/skeleton-psx-lowpoly-a29d95e183984f07a61771cc701b8b09
+* author:	HappyFrog (https://sketchfab.com/mojango)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "skeleton psx lowpoly" (https://sketchfab.com/3d-models/skeleton-psx-lowpoly-a29d95e183984f07a61771cc701b8b09) by HappyFrog (https://sketchfab.com/mojango) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

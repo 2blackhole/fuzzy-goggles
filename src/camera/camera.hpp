@@ -17,10 +17,12 @@ protected:
     static void _bind_methods() {    
         ClassDB::bind_method(D_METHOD("get_anomaly_manager"), &CameraP::get_anomaly_manager);
     }
+
 public:
     void _ready() override;
-    AnomalyManager* get_anomaly_manager();
+
+    AnomalyManager* get_anomaly_manager() const;
+
 };
 
-
-#endif
+#endif // CAMERA
