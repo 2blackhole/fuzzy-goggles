@@ -16,8 +16,8 @@ func set_action_name() -> void:
 	
 	match action_name:
 		"ui_left":
-			label.text = "Переключиться НАХУЙ"
+			label.text = "Переключиться ТУДА"
 		"ui_right":
-			label.text = "Переключиться ВПИЗДУ"
+			label.text = "Переключиться СЮДА"
 		"ui_cancel":
 			label.text = "Меню паузы"
