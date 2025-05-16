@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hkuhli5f6bxm"]
 
-[ext_resource type="Script" uid="uid://bpr1wk7wslod" path="res://scripts/settings_menu.gd" id="1_0cmel"]
-[ext_resource type="PackedScene" uid="uid://dss0o7e2f788a" path="res://settings_tab_container.tscn" id="1_ufg0w"]
+[ext_resource type="Script" uid="uid://bgavmrglj6iso" path="res://scripts/pochemu_tak.gd" id="1_xutny"]
+[ext_resource type="PackedScene" uid="uid://dss0o7e2f788a" path="res://ui/settings_tab_container.tscn" id="2_a6yft"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-script = ExtResource("1_0cmel")
+script = ExtResource("1_xutny")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -44,7 +44,7 @@ text = "OPTIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsTabContainer" parent="TextureRect/MarginContainer/VBoxContainer" instance=ExtResource("1_ufg0w")]
+[node name="SettingsTabContainer" parent="TextureRect/MarginContainer/VBoxContainer" instance=ExtResource("2_a6yft")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3

@@ -1,0 +1,144 @@
+[gd_scene load_steps=4 format=3 uid="uid://dss0o7e2f788a"]
+
+[ext_resource type="PackedScene" uid="uid://b1gg8yjilcfwp" path="res://ui/hotkey_rebind_button.tscn" id="1_x830d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5k23"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsd10"]
+
+[node name="SettingsTabContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 2
+
+[node name="General" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/General"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.317
+anchor_top = 0.429
+anchor_right = 0.683
+anchor_bottom = 0.571
+offset_left = -0.324005
+offset_top = 0.0589905
+offset_right = 0.323975
+offset_bottom = -0.059021
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/General/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Вас устраивает меню паузы?"
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/General/MarginContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Да"
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Громкость музыки"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Громскость интерфейса"
+
+[node name="HSlider2" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Выключить звук?"
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 70
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_q5k23")
+
+[node name="HotkeyRebindButton" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x830d")]
+layout_mode = 2
+
+[node name="HotkeyRebindButton2" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x830d")]
+layout_mode = 2
+action_name = "ui_right"
+
+[node name="HotkeyRebindButton3" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x830d")]
+layout_mode = 2
+action_name = "ui_cancel"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_vsd10")
+
+[node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

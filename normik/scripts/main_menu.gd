@@ -13,12 +13,12 @@ func _ready():
 		push_error("Кнопка Exit не найдена или не MenuButton!")
 	
 	# Устанавливаем сцену возврата как главное меню
-	Global.return_scene_path = "res://main_menu.tscn"
+	Global.return_scene_path = "res://ui/main_menu.tscn"
 
 func _on_Exit_menu_selected(id):
 	match id:
 		0:
-			get_tree().change_scene_to_file("res://main_menu.tscn")
+			get_tree().change_scene_to_file("res://ui/main_menu.tscn")
 		1:
 			get_tree().quit()
 
@@ -31,5 +31,5 @@ func _on_nekiy_prostofilia_pressed():
 
 func _on_settings_pressed() -> void:
 	# Перед переходом в настройки сохраняем текущую сцену
-	Global.return_scene_path = "res://main_menu.tscn"
-	get_tree().change_scene_to_file("res://settings_menu.tscn")
+	Global.return_scene_path = "res://ui/main_menu.tscn"
+	get_tree().change_scene_to_file("res://ui/settings_menu.tscn")

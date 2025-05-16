@@ -31,9 +31,9 @@ func _on_continue_pressed() -> void:
 func _on_settings_pressed() -> void:
 	# Сохраняем текущую сцену перед переходом в настройки
 	Global.return_scene_path = get_tree().current_scene.scene_file_path
-	get_tree().change_scene_to_file("res://settings_menu.tscn")
+	get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
 
 func _on_exit_to_menu_pressed() -> void:
 	get_tree().paused = false
 	hide()
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

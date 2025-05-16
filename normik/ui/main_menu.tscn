@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgmjj0hvijery"]
 
-[ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://mwqgvhk61t61" path="res://govninga/randy-tarampi-U2eUlPEKIgU-unsplash.jpg" id="2_7vrkn"]
+[ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_0dkrt"]
+[ext_resource type="Texture2D" uid="uid://mwqgvhk61t61" path="res://govninga/randy-tarampi-U2eUlPEKIgU-unsplash.jpg" id="2_wk0pr"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-script = ExtResource("1_06t4h")
+script = ExtResource("1_0dkrt")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -21,7 +21,7 @@ anchor_left = 0.00347222
 anchor_top = 0.00154321
 anchor_right = 0.993924
 anchor_bottom = 1.0
-texture = ExtResource("2_7vrkn")
+texture = ExtResource("2_wk0pr")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
