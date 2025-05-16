@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://yjnwgxlqbnte"]
 
-[ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://pause_menu.tscn" id="3_0b4ue"]
+[ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://ui/pause_menu.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://cvaa3iaghvhfu" path="res://models/realistic_pig/scene.gltf" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://gcledk1dkwqa" path="res://models/sid_flushed_away/scene.gltf" id="3_f2txt"]
 [ext_resource type="PackedScene" uid="uid://bfgfwhw5my3tv" path="res://models/barrel/scene.gltf" id="3_i2t4f"]
