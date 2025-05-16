@@ -1,11 +1,45 @@
 # pause_menu.gd
 extends CanvasLayer
 var time = 0
+var acum = 0
+var pomehi = load("res://govninga/pomehi.ogv")
+var anomaly_ef = load("res://govninga/anomaly_hit.ogv")
+@onready var level: GameManager = $".."
+@onready var camera_manager: CameraManager = $"../CameraManager"
+@onready var video_stream_player: VideoStreamPlayer = $"../VideoStreamPlayer"
+@onready var score: Control = $"../Score"
 
+func _on_time_ended() -> void:
+	get_tree().change_scene_to_file("res://ui/player_won.tscn")
+	
+	
+func camera_switched(_govno) -> void:
+	video_stream_player.visible = true
+
+func anomaly_hit(_govno) -> void:
+	video_stream_player.stream = anomaly_ef
+	video_stream_player.play()
+	video_stream_player.visible = true
+	
+	
+func total_active_anomalies_reached(_govno) -> void:
+	get_tree().change_scene_to_file("res://ui/anomalies_won.tscn")
+	
+	
+func all_anomalies_deactivated(_govno) -> void:
+	get_tree().change_scene_to_file("res://ui/player_won.tscn")
+	
+	
 func _ready() -> void:
 	hide()
 	get_tree().paused = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	camera_manager.camera_switched.connect(camera_switched)
+	camera_manager.anomaly_hit.connect(anomaly_hit)
+	level.total_active_anomalies_reached.connect(total_active_anomalies_reached)
+	level.all_anomalies_deactivated.connect(all_anomalies_deactivated)
+	
+	
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -23,6 +57,14 @@ func _process(delta: float) -> void:
 	time += delta
 	cont.rotation_degrees += abs(sin(time)) / 2
 	cont.scale = Vector2(abs(sin(time)) * 2.4, abs(cos(time)) * 3.4)
+	
+	if video_stream_player.visible:
+		acum+=delta
+		if acum > 0.3:
+			acum = 0
+			video_stream_player.hide()
+			video_stream_player.stream = pomehi
+			video_stream_player.play()
 
 func _on_continue_pressed() -> void:
 	get_tree().paused = false
@@ -37,3 +79,4 @@ func _on_exit_to_menu_pressed() -> void:
 	get_tree().paused = false
 	hide()
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")
+	

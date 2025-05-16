@@ -11,9 +11,14 @@ void GameManager::_ready() {
         camera_manager = Object::cast_to<CameraManager>(get_node_or_null("CameraManager"));
     }
     if (camera_manager != nullptr) {
-        camera_manager->connect("camera_switched", Callable(this, "try_spawn_anomaly_after_camera_switch"));
+        // camera_manager->connect("camera_switched", Callable(this, "try_spawn_anomaly"));
         camera_manager->connect("anomaly_hit", Callable(this, "on_anomaly_hit"));
     }
+    peniks = 0;
+    for (int i = 0; i < camera_manager->get_camera_count(); i++) {
+        peniks += (*camera_manager)[i]->get_anomaly_manager()->get_anomalies_count();
+    }
+    print_line("\n", peniks, "\n");
 }
 
 void GameManager::_process(double delta) {
@@ -34,6 +39,11 @@ void GameManager::_process(double delta) {
             if (rand_anomaly_manager >= current_cam_index) ++rand_anomaly_manager;
             anomaly_manager = (*camera_manager)[rand_anomaly_manager]->get_anomaly_manager();
             try_spawn_anomaly();
+
+            if (peniks == score) {
+                emit_signal("all_anomalies_deactivated", score);
+            }
+            
         }
         time_accum = 0.0;
     }
@@ -52,13 +62,14 @@ void GameManager::on_anomaly_hit(Anomaly* anomaly) {
     }
 }
 
-void GameManager::try_spawn_anomaly() {
+void GameManager::try_spawn_anomaly(int govno) {
     if (!anomaly_manager || !camera_manager) {
         return;
     }
 
     if (total_active_anomalies >= max_active_anomalies) {
         print_line("Max active anomalies reached");
+        emit_signal("total_active_anomalies_reached", score);
         return;
     }            
 
@@ -75,7 +86,8 @@ void GameManager::try_spawn_anomaly() {
             std::uniform_int_distribution<int> index_dist(0, total_anomalies - 1);
             int anomaly_index = index_dist(gen);
             Anomaly* anomaly = (*anomaly_manager)(anomaly_index);
-            if (anomaly && !anomaly->get_active() && !anomaly->get_called()) {
+            if (anomaly->get_called()) {try_spawn_anomaly(); return;}
+            if (anomaly && !anomaly->get_active()) {
                 anomaly->activate();
                 anomaly_manager->set_active_anomalies_count(anomaly_manager->get_active_anomalies_count() + 1);
                 print_line("Anomaly activated", anomaly->get_name());

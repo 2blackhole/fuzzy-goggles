@@ -36,14 +36,9 @@ size_flags_horizontal = 8
 layout_mode = 2
 text = "продолжить"
 
-[node name="Settings" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "найстройки"
-
 [node name="Exit_to_menu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "выйти в главное меню"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Exit_to_menu" to="." method="_on_exit_to_menu_pressed"]
