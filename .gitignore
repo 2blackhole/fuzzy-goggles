@@ -9,3 +9,6 @@ vc140.pdb
 /__pycache__
 /.vscode
 *.x86_64.so
+bin/
+normik/bin/linux/
+normik/bin/windows/
