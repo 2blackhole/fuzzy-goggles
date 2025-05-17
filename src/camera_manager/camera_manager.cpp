@@ -7,6 +7,8 @@ void CameraManager::_ready() {
 
     TypedArray<Node> children = get_children();
 
+    if (!children) { return; }
+
     for (int i = 0; i < children.size(); ++i) {
         if (CameraP* camera = Object::cast_to<CameraP>(children[i])) {
             cameras.push_back(camera);
@@ -36,6 +38,10 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
 
 // это надо переписать в гейм менеджер
 void CameraManager::_physics_process(double delta) {
+    if (current_active_camera_id < 0 || current_active_camera_id >= cameras.size()) {
+        return;
+    }
+    
     Camera3D* current_cam = cameras[current_active_camera_id];
     if (!current_cam) {
         print_line("_physics_process camera problem");

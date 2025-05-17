@@ -33,17 +33,21 @@ anchors_preset = -1
 anchor_left = 0.111
 anchor_top = 0.198
 anchor_right = 0.333
-anchor_bottom = 0.469
-offset_left = 0.127991
+anchor_bottom = 0.529
+offset_left = 0.127983
 offset_top = -0.304016
 offset_right = 0.384003
-offset_bottom = 0.0879822
+offset_bottom = -38.792
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Obuchenie" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Обучение"
 
 [node name="Play" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,6 +72,7 @@ popup/item_0/id = 0
 popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ???"
 popup/item_1/id = 1
 
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Obuchenie" to="." method="_on_obuchenie_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/NekiyProstofilia" to="." method="_on_nekiy_prostofilia_pressed"]

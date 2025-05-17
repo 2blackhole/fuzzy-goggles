@@ -33,3 +33,7 @@ func _on_settings_pressed() -> void:
 	# Перед переходом в настройки сохраняем текущую сцену
 	Global.return_scene_path = "res://ui/main_menu.tscn"
 	get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
+
+
+func _on_obuchenie_pressed() -> void:
+	get_tree().change_scene_to_file("res://obuchalka.tscn")
