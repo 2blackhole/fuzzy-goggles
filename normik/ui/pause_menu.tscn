@@ -19,18 +19,23 @@ metadata/_edit_use_anchors_ = true
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.435
-anchor_top = 0.422
-anchor_right = 0.63
-anchor_bottom = 0.656
-offset_right = -74.7601
-offset_bottom = -50.588
+anchor_left = 0.507
+anchor_top = 0.432
+anchor_right = 0.91
+anchor_bottom = 0.617
+offset_left = -0.0640259
+offset_top = 0.0639954
+offset_right = -153.32
+offset_bottom = -36.816
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Continue" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2

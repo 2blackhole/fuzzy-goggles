@@ -26,7 +26,7 @@ func _on_IGRAT_V_IGRU_pressed_ching_chong_bing():
 	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_nekiy_prostofilia_pressed():
-	pass
+	get_tree().change_scene_to_file("res://ui/for_creators/game_created_by.tscn")
 	
 
 func _on_settings_pressed() -> void:

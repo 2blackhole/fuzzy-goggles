@@ -1,5 +1,5 @@
 extends Control
-var govno = 180;
+var govno = 20;
 signal time_ended;
 
 @onready var score = $Score as Label
@@ -15,11 +15,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	score.text = "Score: " + str($"..".get_score())
 	var minut = str(int(govno / 60))
-	var sekund = int(govno) % 60;
-	if sekund <= 9:
-		sekund = str("0" + str(sekund))
-	sekund = str(sekund)
-	time_left.text = "Time left - " + minut + ":" + sekund;
+	var sekund = str(int(govno) % 60);
+	if int(govno) % 60 < 10:
+		time_left.text = "Time left - " + minut + ":0" + sekund;
+	else:
+		time_left.text = "Time left - " + minut + ":" + sekund;
+
 	govno -= delta
 	if govno <= 0:
 		emit_signal("time_ended")
