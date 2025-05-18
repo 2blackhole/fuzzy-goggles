@@ -39,4 +39,5 @@ func _ready():
 		github_button.tooltip_text = github_url
 	
 func _on_button_pressed():
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	OS.shell_open(github_url)
