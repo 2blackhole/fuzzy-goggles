@@ -1,5 +1,4 @@
 #include "anomaly_manager.hpp"
-#include <algorithm>
 
 
 void AnomalyManager::_ready() {

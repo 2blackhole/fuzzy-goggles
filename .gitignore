@@ -8,7 +8,7 @@ vc140.pdb
 /src/gen
 /__pycache__
 /.vscode
-*.x86_64.so
 bin/
 normik/bin/linux/
 normik/bin/windows/
+normik/export_presets.cfg

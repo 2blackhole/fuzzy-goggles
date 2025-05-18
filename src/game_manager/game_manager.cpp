@@ -11,7 +11,6 @@ void GameManager::_ready() {
         camera_manager = Object::cast_to<CameraManager>(get_node_or_null("CameraManager"));
     }
     if (camera_manager != nullptr) {
-        // camera_manager->connect("camera_switched", Callable(this, "try_spawn_anomaly"));
         camera_manager->connect("anomaly_hit", Callable(this, "on_anomaly_hit"));
     }
     peniks = 0;

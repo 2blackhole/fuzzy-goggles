@@ -25,8 +25,6 @@ void CameraManager::_ready() {
 void CameraManager::_input(const Ref<InputEvent>& event) {
     if (event.is_null()) { return; }
 
-    // UtilityFunctions::print("Input event detected: ", event->as_text()); // вообще все инпуты показывает
-
     if (event->is_action_pressed("ui_right")) {
         switch_to_next_camera();
     } else if (event->is_action_pressed("ui_left")) {
@@ -36,7 +34,6 @@ void CameraManager::_input(const Ref<InputEvent>& event) {
     }
 }
 
-// это надо переписать в гейм менеджер
 void CameraManager::_physics_process(double delta) {
     if (current_active_camera_id < 0 || current_active_camera_id >= cameras.size()) {
         return;
@@ -114,14 +111,12 @@ void CameraManager::switch_to_camera(int index) {
         UtilityFunctions::printerr("CameraManager: Invalid camera index!");
         return;
     }
-
-    // Деактивируем текущую камеру
+    
     if (current_active_camera_id != -1 &&
         cameras[current_active_camera_id] != nullptr) {
         cameras[current_active_camera_id]->set_current(false);
     }
 
-    // Активируем новую
     current_active_camera_id = index;
     cameras[index]->set_current(true);
 
