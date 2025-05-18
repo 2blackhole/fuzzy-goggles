@@ -6,7 +6,7 @@ signal time_ended;
 @onready var time_left = $TimeLeft as Label
 
 func _ready() -> void:
-	var target_node = get_parent().get_node("CanvasLayer")
+	var target_node = get_parent().get_node("pausemenu")
 	if !target_node:
 		push_error("GOVNO")
 	time_ended.connect(target_node._on_time_ended)

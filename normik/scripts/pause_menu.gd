@@ -42,14 +42,19 @@ func _ready() -> void:
 	
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	var tutorial_active = false
+	for node in get_tree().get_nodes_in_group("tutorial"):
+		if node.visible:
+			tutorial_active = true
+			break
+	
+	if event.is_action_pressed("ui_cancel") and not tutorial_active:
 		if visible:
 			hide()
 			get_tree().paused = false
 		else:
 			show()
 			get_tree().paused = true
-			# Устанавливаем сцену возврата как текущую сцену
 			Global.return_scene_path = get_tree().current_scene.scene_file_path
 
 func _process(delta: float) -> void:
@@ -70,10 +75,10 @@ func _on_continue_pressed() -> void:
 	get_tree().paused = false
 	hide()
 
-func _on_settings_pressed() -> void:
-	# Сохраняем текущую сцену перед переходом в настройки
-	Global.return_scene_path = get_tree().current_scene.scene_file_path
-	get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
+#func _on_settings_pressed() -> void:
+	## Сохраняем текущую сцену перед переходом в настройки
+	#Global.return_scene_path = get_tree().current_scene.scene_file_path
+	#get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
 
 func _on_exit_to_menu_pressed() -> void:
 	get_tree().paused = false

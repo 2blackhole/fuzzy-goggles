@@ -1,7 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr8i80g2jggm7"]
+[gd_scene load_steps=11 format=3 uid="uid://bvfsuyb24t6lg"]
 
 [ext_resource type="PackedScene" uid="uid://dkayr1pt2o67p" path="res://models/sub_s_map/scene.gltf" id="1_0r8c0"]
 [ext_resource type="PackedScene" uid="uid://dt55cpih2lyq1" path="res://models/freestanding_bath/scene.gltf" id="1_26rom"]
+[ext_resource type="PackedScene" uid="uid://bbplrmb3o3470" path="res://ui/score.tscn" id="3_jrog7"]
+[ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://ui/pause_menu.tscn" id="4_312wb"]
+[ext_resource type="VideoStream" uid="uid://bkbhlnljntjkm" path="res://govninga/pomehi.ogv" id="5_bnwps"]
+[ext_resource type="PackedScene" uid="uid://bup6n4e7117vu" path="res://ui/obuchalka_table.tscn" id="6_gplmr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jrog7"]
+size = Vector3(7.27744, 2.66675, 3.63416)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0r8c0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,17 +23,7 @@ sky = SubResource("Sky_26rom")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jrog7"]
-size = Vector3(7.27744, 2.66675, 3.63416)
-
 [node name="Obuchalka" type="GameManager"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.32999, -0.87415, 0.356325, 0.0653327, 0.397713, 0.915181, -0.941721, -0.278721, 0.188352, 0, 14.3559, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jrog7")
 
 [node name="CameraManager" type="CameraManager" parent="."]
 
@@ -48,12 +45,39 @@ fov = 80.0
 transform = Transform3D(0.583071, 0, -0.141523, 0, 0.6, 0, 0.141523, 0, 0.583071, 279.97, 8.23526, 6.5345)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraManager/CamStart/AnomalyManager/Anomaly"]
+visible = false
 
 [node name="Sketchfab_Scene" parent="CameraManager/CamStart/AnomalyManager/Anomaly/MeshInstance3D" instance=ExtResource("1_26rom")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/CamStart/AnomalyManager/Anomaly"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194794, -1.04456, -0.019104)
 shape = SubResource("BoxShape3D_jrog7")
+disabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jrog7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.32999, -0.87415, 0.356325, 0.0653327, 0.397713, 0.915181, -0.941721, -0.278721, 0.188352, 0, 14.3559, 0)
+shadow_enabled = true
 
 [node name="subwaysurfmapp" parent="." instance=ExtResource("1_0r8c0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.583, 0, 54.4639)
+
+[node name="Score" parent="." instance=ExtResource("3_jrog7")]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("5_bnwps")
+autoplay = true
+expand = true
+loop = true
+
+[node name="pausemenu" parent="." instance=ExtResource("4_312wb")]
+
+[node name="obuch_table" parent="." instance=ExtResource("6_gplmr")]
+visible = false

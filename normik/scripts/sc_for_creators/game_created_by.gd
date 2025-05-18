@@ -41,7 +41,7 @@ func _ready():
 	await get_tree().process_frame
 	
 	cards_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	cards_container.add_theme_constant_override("separation", get_viewport_rect().size.x * 0.44)
+	cards_container.add_theme_constant_override("separation", get_viewport_rect().size.x * 0.45)
 	
 	var card_scene = preload("res://ui/for_creators/developer_card.tscn")
 	

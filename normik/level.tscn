@@ -266,7 +266,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274277, 1.49569, 0.07587
 shape = SubResource("CapsuleShape3D_h6smj")
 disabled = true
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_0b4ue")]
+[node name="pausemenu" parent="." instance=ExtResource("3_0b4ue")]
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 anchors_preset = 15
