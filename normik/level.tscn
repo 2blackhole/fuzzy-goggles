@@ -86,7 +86,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.8466
 [node name="city" parent="." instance=ExtResource("3_oi3di")]
 
 [node name="Toilets_on_roof" parent="." instance=ExtResource("4_1bvp3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.36468, 2.93394, 31.1741)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.36468, 20.2575, 32.4535)
 
 [node name="CameraManager" type="CameraManager" parent="."]
 
@@ -280,3 +280,4 @@ expand = true
 loop = true
 
 [node name="Score" parent="." instance=ExtResource("15_v5j5c")]
+govno = 180

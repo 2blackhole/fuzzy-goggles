@@ -1,9 +1,10 @@
 extends Control
-var govno = 20;
 signal time_ended;
 
 @onready var score = $Score as Label
 @onready var time_left = $TimeLeft as Label
+
+@export var govno = 20
 
 func _ready() -> void:
 	var target_node = get_parent().get_node("pausemenu")

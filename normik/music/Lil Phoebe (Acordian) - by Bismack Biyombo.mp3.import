@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://baas402g2ndqx"
+path="res://.godot/imported/Lil Phoebe (Acordian) - by Bismack Biyombo.mp3-9b65c71ee7716ad225ac116f75502829.mp3str"
+
+[deps]
+
+source_file="res://music/Lil Phoebe (Acordian) - by Bismack Biyombo.mp3"
+dest_files=["res://.godot/imported/Lil Phoebe (Acordian) - by Bismack Biyombo.mp3-9b65c71ee7716ad225ac116f75502829.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

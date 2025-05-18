@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgmjj0hvijery"]
+[gd_scene load_steps=4 format=3 uid="uid://bgmjj0hvijery"]
 
 [ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_0dkrt"]
 [ext_resource type="Texture2D" uid="uid://mwqgvhk61t61" path="res://govninga/randy-tarampi-U2eUlPEKIgU-unsplash.jpg" id="2_wk0pr"]
+[ext_resource type="AudioStream" uid="uid://bmud1xtgb0cwo" path="res://music/ekh.mp3" id="3_wk0pr"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -71,6 +72,10 @@ popup/item_0/text = "НАММАЛОЛЯМАНОМИНАЛО"
 popup/item_0/id = 0
 popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ???"
 popup/item_1/id = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wk0pr")
+volume_db = -37.197
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Obuchenie" to="." method="_on_obuchenie_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]

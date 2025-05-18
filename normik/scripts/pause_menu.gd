@@ -72,6 +72,7 @@ func _process(delta: float) -> void:
 			video_stream_player.play()
 
 func _on_continue_pressed() -> void:
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().paused = false
 	hide()
 
@@ -81,6 +82,7 @@ func _on_continue_pressed() -> void:
 	#get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
 
 func _on_exit_to_menu_pressed() -> void:
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().paused = false
 	hide()
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

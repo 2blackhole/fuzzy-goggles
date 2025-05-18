@@ -2,6 +2,7 @@
 extends Control
 
 func _ready():
+	
 	var exit_menu = $TextureRect/MarginContainer/VBoxContainer/Exit
 	if exit_menu:
 		var popup = exit_menu.get_popup()
@@ -16,6 +17,7 @@ func _ready():
 	Global.return_scene_path = "res://ui/main_menu.tscn"
 
 func _on_Exit_menu_selected(id):
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	match id:
 		0:
 			get_tree().change_scene_to_file("res://ui/main_menu.tscn")
@@ -23,17 +25,21 @@ func _on_Exit_menu_selected(id):
 			get_tree().quit()
 
 func _on_IGRAT_V_IGRU_pressed_ching_chong_bing():
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_nekiy_prostofilia_pressed():
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().change_scene_to_file("res://ui/for_creators/game_created_by.tscn")
 	
 
 func _on_settings_pressed() -> void:
 	# Перед переходом в настройки сохраняем текущую сцену
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	Global.return_scene_path = "res://ui/main_menu.tscn"
 	get_tree().change_scene_to_file("res://ui/settings_menu.tscn")
 
 
 func _on_obuchenie_pressed() -> void:
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().change_scene_to_file("res://obuchalka.tscn")
