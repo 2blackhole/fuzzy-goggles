@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvfsuyb24t6lg"]
+[gd_scene load_steps=12 format=3 uid="uid://bvfsuyb24t6lg"]
 
 [ext_resource type="PackedScene" uid="uid://dkayr1pt2o67p" path="res://models/sub_s_map/scene.gltf" id="1_0r8c0"]
 [ext_resource type="PackedScene" uid="uid://dt55cpih2lyq1" path="res://models/freestanding_bath/scene.gltf" id="1_26rom"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://ui/pause_menu.tscn" id="4_312wb"]
 [ext_resource type="VideoStream" uid="uid://bkbhlnljntjkm" path="res://govninga/pomehi.ogv" id="5_bnwps"]
 [ext_resource type="PackedScene" uid="uid://bup6n4e7117vu" path="res://ui/obuchalka_table.tscn" id="6_gplmr"]
+[ext_resource type="AudioStream" uid="uid://d2m5b8nnaqtd4" path="res://music/audiocheck.net_whitenoise.wav" id="7_sadjj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jrog7"]
 size = Vector3(7.27744, 2.66675, 3.63416)
@@ -81,3 +82,7 @@ loop = true
 
 [node name="obuch_table" parent="." instance=ExtResource("6_gplmr")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_sadjj")
+bus = &"Sfx"

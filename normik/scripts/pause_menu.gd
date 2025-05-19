@@ -8,18 +8,26 @@ var anomaly_ef = load("res://govninga/anomaly_hit.ogv")
 @onready var camera_manager: CameraManager = $"../CameraManager"
 @onready var video_stream_player: VideoStreamPlayer = $"../VideoStreamPlayer"
 @onready var score: Control = $"../Score"
+@onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
+
+var change_camera_sound = load("res://music/audiocheck.net_whitenoise.wav")
+var anomaly_hit_sound = load("res://music/Fart with reverb sound effect.mp3")
 
 func _on_time_ended() -> void:
 	get_tree().change_scene_to_file("res://ui/player_won.tscn")
 	
-	
+
 func camera_switched(_govno) -> void:
 	video_stream_player.visible = true
+	audio_stream_player.stream = change_camera_sound
+	audio_stream_player.play()
 
 func anomaly_hit(_govno) -> void:
 	video_stream_player.stream = anomaly_ef
 	video_stream_player.play()
 	video_stream_player.visible = true
+	audio_stream_player.stream = anomaly_hit_sound
+	audio_stream_player.play()
 	
 	
 func total_active_anomalies_reached(_govno) -> void:
@@ -67,6 +75,7 @@ func _process(delta: float) -> void:
 		acum+=delta
 		if acum > 0.3:
 			acum = 0
+			audio_stream_player.stop()
 			video_stream_player.hide()
 			video_stream_player.stream = pomehi
 			video_stream_player.play()
