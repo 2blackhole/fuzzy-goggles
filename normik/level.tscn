@@ -286,4 +286,4 @@ govno = 180
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_5pxul")
 volume_db = -11.387
-bus = &"Sfx"
+bus = &"PEDEJZ"
