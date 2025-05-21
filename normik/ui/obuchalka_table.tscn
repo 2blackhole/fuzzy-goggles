@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://bup6n4e7117vu"]
+
+[ext_resource type="Script" uid="uid://cgp3a6jyaw870" path="res://scripts/obuchalka.gd" id="1_v3i0x"]
+
+[node name="Obuchalka" type="CanvasLayer"]
+script = ExtResource("1_v3i0x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.277778
+anchor_top = 0.0987654
+anchor_right = 0.777778
+anchor_bottom = 0.888889
+offset_left = -32.0
+offset_right = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.328042, 0.460982, 0.252188, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.291667
+anchor_top = 0.123457
+anchor_right = 0.763889
+anchor_bottom = 0.864198
+offset_left = -32.0
+offset_right = -32.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0441176
+anchor_top = 0.0333333
+anchor_right = 0.955882
+anchor_bottom = 0.1
+grow_horizontal = 2
+grow_vertical = 2
+text = "АНОМАЛИЯ ФАКЕР: ОБУЧЕНИЕ"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TEXT" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0441176
+anchor_top = 0.15
+anchor_right = 0.955882
+anchor_bottom = 0.366667
+grow_horizontal = 2
+grow_vertical = 2
+text = "• ЛКМ - стрелять по аномалиям
+• ←/→ - переключать камеры
+• ESC - пауза"
+metadata/_edit_use_anchors_ = true
+
+[node name="TEXT2" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0441176
+anchor_top = 0.416667
+anchor_right = 0.955882
+anchor_bottom = 0.69375
+grow_horizontal = 2
+grow_vertical = 2
+text = "Если на карте будет слишком много аномалий - проиграл
+Выживи определенное время - выиграл"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TRUSHECHKA" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0441176
+anchor_top = 0.766667
+anchor_right = 0.955882
+anchor_bottom = 0.83125
+grow_horizontal = 2
+grow_vertical = 2
+text = "Уничтожь всех, бро!"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0441176
+anchor_top = 0.866667
+anchor_right = 0.955882
+anchor_bottom = 0.966667
+grow_horizontal = 2
+grow_vertical = 0
+text = "Начать обучение"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]

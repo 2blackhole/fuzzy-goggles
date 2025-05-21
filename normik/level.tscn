@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://yjnwgxlqbnte"]
+[gd_scene load_steps=32 format=3 uid="uid://yjnwgxlqbnte"]
 
-[ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://pause_menu.tscn" id="3_0b4ue"]
+[ext_resource type="PackedScene" uid="uid://01lgturigyc" path="res://ui/pause_menu.tscn" id="3_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://cvaa3iaghvhfu" path="res://models/realistic_pig/scene.gltf" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://gcledk1dkwqa" path="res://models/sid_flushed_away/scene.gltf" id="3_f2txt"]
 [ext_resource type="PackedScene" uid="uid://bfgfwhw5my3tv" path="res://models/barrel/scene.gltf" id="3_i2t4f"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bslcmhp7j3hnd" path="res://models/skeleton_in_cage/scene.gltf" id="8_2orkt"]
 [ext_resource type="PackedScene" uid="uid://5xrjuef4bfv8" path="res://models/skeleton/scene.gltf" id="9_8cye3"]
 [ext_resource type="PackedScene" uid="uid://cbmh41epddxjf" path="res://models/joker/scene.gltf" id="12_8b0r0"]
+[ext_resource type="VideoStream" uid="uid://bkbhlnljntjkm" path="res://govninga/pomehi.ogv" id="14_h6smj"]
+[ext_resource type="PackedScene" uid="uid://bbplrmb3o3470" path="res://ui/score.tscn" id="15_v5j5c"]
+[ext_resource type="AudioStream" uid="uid://d2m5b8nnaqtd4" path="res://music/audiocheck.net_whitenoise.wav" id="16_5pxul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -84,7 +87,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.8466
 [node name="city" parent="." instance=ExtResource("3_oi3di")]
 
 [node name="Toilets_on_roof" parent="." instance=ExtResource("4_1bvp3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.36468, 2.93394, 31.1741)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.36468, 20.2575, 32.4535)
 
 [node name="CameraManager" type="CameraManager" parent="."]
 
@@ -264,4 +267,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274277, 1.49569, 0.07587
 shape = SubResource("CapsuleShape3D_h6smj")
 disabled = true
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_0b4ue")]
+[node name="pausemenu" parent="." instance=ExtResource("3_0b4ue")]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("14_h6smj")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Score" parent="." instance=ExtResource("15_v5j5c")]
+govno = 180
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_5pxul")
+volume_db = -11.387
+bus = &"PEDEJZ"

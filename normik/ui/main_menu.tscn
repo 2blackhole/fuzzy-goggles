@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgmjj0hvijery"]
+[gd_scene load_steps=4 format=3 uid="uid://bgmjj0hvijery"]
 
 [ext_resource type="Script" uid="uid://b25u22bimcq5j" path="res://scripts/main_menu.gd" id="1_0dkrt"]
 [ext_resource type="Texture2D" uid="uid://mwqgvhk61t61" path="res://govninga/randy-tarampi-U2eUlPEKIgU-unsplash.jpg" id="2_wk0pr"]
+[ext_resource type="AudioStream" uid="uid://bmud1xtgb0cwo" path="res://music/ekh.mp3" id="3_wk0pr"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,11 +17,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
-layout_mode = 0
-anchor_left = 0.00347222
-anchor_top = 0.00154321
-anchor_right = 0.993924
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_wk0pr")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
@@ -29,18 +31,24 @@ metadata/_edit_use_anchors_ = true
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.088
-anchor_top = 0.155
-anchor_right = 0.307
-anchor_bottom = 0.419
-offset_left = -0.408051
-offset_top = -0.285004
-offset_right = -100.287
-offset_bottom = -100.093
+anchor_left = 0.111
+anchor_top = 0.198
+anchor_right = 0.333
+anchor_bottom = 0.529
+offset_left = 0.127983
+offset_top = -0.304016
+offset_right = 0.384003
+offset_bottom = -38.792
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Obuchenie" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Обучение"
 
 [node name="Play" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -65,6 +73,11 @@ popup/item_0/id = 0
 popup/item_1/text = "ты БАРАН и хочешь ВЫЙТИ???"
 popup/item_1/id = 1
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wk0pr")
+volume_db = -37.197
+
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Obuchenie" to="." method="_on_obuchenie_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Play" to="." method="_on_IGRAT_V_IGRU_pressed_ching_chong_bing"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/NekiyProstofilia" to="." method="_on_nekiy_prostofilia_pressed"]

@@ -17,11 +17,12 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout=""
+buses/default_bus_layout="uid://2u6uik2kg58q"
 
 [autoload]
 
 Global="*res://scripts/global.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [dotnet]
 

@@ -7,4 +7,5 @@ func _ready():
 
 func _on_exit_pressed() -> void:
 	# Возвращаемся на сцену, которая была сохранена в Global
+	AudioManager.play_sfx("res://music/ekh.mp3")
 	get_tree().change_scene_to_file(Global.return_scene_path)

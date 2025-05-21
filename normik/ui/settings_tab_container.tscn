@@ -1,5 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dss0o7e2f788a"]
+[gd_scene load_steps=6 format=3 uid="uid://dss0o7e2f788a"]
 
+[ext_resource type="Script" uid="uid://cg1c5hdc3d83c" path="res://ui/general.gd" id="1_2m60f"]
+[ext_resource type="Script" uid="uid://bigtovp88g4gf" path="res://ui/sound.gd" id="1_k3wvw"]
 [ext_resource type="PackedScene" uid="uid://b1gg8yjilcfwp" path="res://ui/hotkey_rebind_button.tscn" id="1_x830d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5k23"]
@@ -26,11 +28,11 @@ offset_right = -40.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 2
+current_tab = 0
 
 [node name="General" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+script = ExtResource("1_2m60f")
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/General"]
@@ -62,6 +64,7 @@ text = "Да"
 [node name="Sound" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+script = ExtResource("1_k3wvw")
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
@@ -81,21 +84,28 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "Громкость музыки"
 
-[node name="HSlider" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+[node name="Music" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.1
 
 [node name="Label2" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Громскость интерфейса"
 
-[node name="HSlider2" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+[node name="Sfx" type="HSlider" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.1
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Выключить звук?"
 
 [node name="Controls" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -138,7 +148,6 @@ layout_mode = 2
 theme_override_constants/separation = 32
 theme_override_styles/separator = SubResource("StyleBoxEmpty_vsd10")
 
-[node name="Graphics" type="TabBar" parent="TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
+[connection signal="value_changed" from="TabContainer/Sound/MarginContainer/VBoxContainer/Music" to="TabContainer/Sound" method="_on_music_value_changed"]
+[connection signal="value_changed" from="TabContainer/Sound/MarginContainer/VBoxContainer/Sfx" to="TabContainer/Sound" method="_on_sfx_value_changed"]
+[connection signal="toggled" from="TabContainer/Sound/MarginContainer/VBoxContainer/CheckBox" to="TabContainer/Sound" method="_on_check_box_toggled"]

@@ -57,7 +57,6 @@ public:
     void switch_to_previous_camera();
 
     CameraP* operator[](int i) {return cameras[i];}
-    CameraP* operator()(int i) {return cameras[i];}
 };
 
 #endif // CAMERA_MANAGER
